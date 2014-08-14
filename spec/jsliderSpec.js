@@ -28,4 +28,18 @@ describe('JSlider', function() {
       expect(jslider.duration).toBe(100);
     });
   });
+
+  describe('#getTotalWidth', function() {
+
+    it ('returns correct total width', function() {
+      var jslider = new window.jslider({
+        count: 5,
+        width: 300,
+      });
+      var width = jslider.getTotalWidth();
+      var expectedWidth = 1500;
+
+      expect(width).toBe(expectedWidth);
+    });
+  });
 });
