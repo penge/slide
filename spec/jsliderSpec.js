@@ -10,6 +10,7 @@ describe('JSlider', function() {
         height: 100,
         duration: 300,
       });
+      
       expect(jslider.id).toBe('my-news');
       expect(jslider.count).toBe(15);
       expect(jslider.width).toBe(200);
@@ -19,6 +20,7 @@ describe('JSlider', function() {
     
     it('properly sets defaults for variables', function() {
       var jslider = new window.jslider();
+
       expect(jslider.id).toBe('news');
       expect(jslider.count).toBe(10);
       expect(jslider.width).toBe(200);
