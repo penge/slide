@@ -3,7 +3,7 @@ describe('JSlider', function() {
   describe('construction', function() {
 
     it('properly sets variables', function() {
-      var jslider = new window.jslider({
+      var jslider = new JSlider({
         id: 'my-news',
         count: 15,
         width: 200,
@@ -19,7 +19,7 @@ describe('JSlider', function() {
     });
     
     it('properly sets defaults for variables', function() {
-      var jslider = new window.jslider();
+      var jslider = new JSlider();
 
       expect(jslider.id).toBe('news');
       expect(jslider.count).toBe(10);
@@ -32,7 +32,7 @@ describe('JSlider', function() {
   describe('#getTotalWidth', function() {
 
     it ('returns correct total width', function() {
-      var jslider = new window.jslider({
+      var jslider = new JSlider({
         count: 5,
         width: 300,
       });
@@ -46,7 +46,7 @@ describe('JSlider', function() {
   describe('#getBoxDelay', function() {
 
     it('returns correct box delay', function() {
-      var jslider = new window.jslider({
+      var jslider = new JSlider({
         count: 5,
         duration: 100,
       });
@@ -62,7 +62,7 @@ describe('JSlider', function() {
   describe('#getHtml', function() {
 
     it('returns correct html string', function() {
-      var jslider = new window.jslider({
+      var jslider = new JSlider({
         count: 3
       });
       var html = jslider.getHtml(); 
