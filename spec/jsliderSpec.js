@@ -42,4 +42,20 @@ describe('JSlider', function() {
       expect(width).toBe(expectedWidth);
     });
   });
+
+  describe('#getBoxDelay', function() {
+
+    it('returns correct box delay', function() {
+      var jslider = new window.jslider({
+        count: 5,
+        duration: 100,
+      });
+
+      expect(jslider.getBoxDelay(0)).toBe(0);
+      expect(jslider.getBoxDelay(1)).toBe(20);
+      expect(jslider.getBoxDelay(2)).toBe(40);
+      expect(jslider.getBoxDelay(3)).toBe(60);
+      expect(jslider.getBoxDelay(4)).toBe(80);
+    });
+  });
 });
