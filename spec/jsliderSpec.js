@@ -58,4 +58,24 @@ describe('JSlider', function() {
       expect(jslider.getBoxDelay(4)).toBe(80);
     });
   });
+
+  describe('#getHtml', function() {
+
+    it('returns correct html string', function() {
+      var jslider = new window.jslider({
+        count: 3
+      });
+      var html = jslider.getHtml(); 
+      var expectedHtml = '' + 
+        '<div id="news">' +
+        '<div class="boxes">' +
+        '<div class="box">1</div>' +
+        '<div class="box">2</div>' +
+        '<div class="box">3</div>' +
+        '</div>' +
+        '</div>';
+
+      expect(html).toBe(expectedHtml);
+    });
+  });
 });
