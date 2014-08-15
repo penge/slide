@@ -1,5 +1,5 @@
 window.JSlider = (function() {
-  'use sctrict';
+  'use strict';
   
   function JSlider(settings) {
     settings = (settings == null) ? {} : settings;
