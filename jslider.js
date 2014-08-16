@@ -4,11 +4,11 @@ window.JSlider = (function() {
   function JSlider(settings) {
     settings = (settings == null) ? {} : settings;
     
-    this.id       = settings["id"]       || 'news';
-    this.count    = settings["count"]    || 10;
-    this.width    = settings["width"]    || 200;
-    this.height   = settings["height"]   || 200;
-    this.duration = settings["duration"] || 100;
+    this.id       = settings.id       || 'news';
+    this.count    = settings.count    || 10;
+    this.width    = settings.width    || 200;
+    this.height   = settings.height   || 200;
+    this.duration = settings.duration || 100;
   }
 
   JSlider.prototype.getTotalWidth = function() {
