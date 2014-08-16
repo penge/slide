@@ -56,6 +56,7 @@ window.JSlider = (function() {
         'float:left;' +
         'width:' + width + ';' +
         'height:' + height + ';' +
+        'line-height:' + height + ';' +
         'user-select:none;' +
         '-webkit-user-select:none;' +
         '-moz-user-select:none;' +
