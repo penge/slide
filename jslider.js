@@ -16,7 +16,7 @@ window.JSlider = (function() {
   }
 
   JSlider.prototype.getBoxDelay = function(boxIndex) {
-    return ((this.duration / this.count) * (boxIndex)).toFixed(3);
+    return parseFloat(((this.duration / this.count) * (boxIndex)).toFixed(3));
   }
 
   JSlider.prototype.getHtml = function() {
