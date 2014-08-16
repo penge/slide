@@ -31,7 +31,7 @@ describe('JSlider', function() {
 
   describe('#getTotalWidth', function() {
 
-    it ('returns correct total width', function() {
+    it('returns correct total width', function() {
       var jslider = new JSlider({
         count: 5,
         width: 300,
