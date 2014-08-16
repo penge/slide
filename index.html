@@ -8,7 +8,30 @@
   <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-  <div id="preview"></div>
+  <div id="header">
+    <div class="title">jSlider</div>
+  </div>
+ 
+  <div id="preview">
+    <div id="html-preview"></div>
+    <style id="css-preview" type="text/css"></style>
+  </div> 
+
+  <div id="settings">
+    <div class="title">Settings</div>
+    <div class="setting"><span>ID?</span><input id="id"></div>
+    <div class="setting"><span>How many?</span><input id="count" type="number" min="2">boxes</div>
+    <div class="setting"><span>Width of each?</span><input id="width" type="number" min="10">px</div>
+    <div class="setting"><span>Height of each?</span><input id="height" type="number" min="10">px</div>
+    <div class="setting"><span>Duration?</span><input id="duration" type="number" min="10">sec</div>
+  </div>
+  
+  <div id="codes">
+    <div id="html-link" class="title link">HTML</div> 
+    <div id="css-link" class="title link">CSS</div> 
+    <div id="html" class="code"></div>
+    <div id="css" class="code"></div>
+  </div>
 
   <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="jslider.js"></script>
