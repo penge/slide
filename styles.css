@@ -98,3 +98,11 @@ body {
   color: black;
   padding: 20px;
 }
+
+/* Media */
+
+@media all and (max-width: 960px) {
+  #settings, #codes {
+    width: 100% !important;
+  }
+}
