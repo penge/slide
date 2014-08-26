@@ -1,23 +1,6 @@
 {
   "name": "jslider",
-  "main": "jslider.js",
-  "version": "0.0.0",
-  "homepage": "https://github.com/penge/jslider",
-  "authors": [
-    "Pavel Bucka <pavelbucka@icloud.com>"
-  ],
-  "moduleType": [
-    "globals"
-  ],
-  "license": "MIT",
   "private": true,
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
   "devDependencies": {
     "jasmine-standalone": "~2.0.0"
   }
