@@ -2,7 +2,7 @@ window.JSlider = (function() {
   'use strict';
   
   function JSlider(settings) {
-    settings = (settings == null) ? {} : settings;
+    settings = settings ? settings : {};
     
     this.id       = settings.id       || 'news';
     this.count    = settings.count    || 10;
