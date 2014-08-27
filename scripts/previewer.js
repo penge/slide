@@ -9,17 +9,17 @@ window.Previewer = (function() {
   Previewer.prototype.preview = function() {
     this.previewHtml();
     this.previewCss();
-  }
+  };
 
   Previewer.prototype.previewHtml = function() {
     $('#html-preview').html(this.html);  
     $('#html').text(this.html);
-  }
+  };
   
   Previewer.prototype.previewCss = function() {
     $('#css-preview').html(this.css);
     $('#css').text(this.css);
-  }
+  };
 
   return Previewer;
 })();

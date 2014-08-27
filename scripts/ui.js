@@ -15,7 +15,7 @@ window.UI = (function() {
     initInputs();
     initLinks();
     preview();
-  }
+  };
 
   var initInputs = function() {
     $id.val(jslider.id);
@@ -25,7 +25,7 @@ window.UI = (function() {
     $duration.val(jslider.duration);
 
     registerInputsEvents();
-  }
+  };
 
   var registerInputsEvents = function() {
     var inputs = [$id, $count, $width, $height, $duration];
@@ -41,14 +41,14 @@ window.UI = (function() {
         update();
       });
     });
-  }
+  };
 
   var initLinks = function() {
     $('#html-link').addClass('active');
     $('#css').hide();
 
     initLinksEvents();
-  }
+  };
 
   var initLinksEvents = function() {
     $('.link').click(function() {
@@ -61,14 +61,14 @@ window.UI = (function() {
       var codeId = '#' + $(this).attr('id').replace('-link','');
       $(codeId).show();
     });
-  }
+  };
 
   var preview = function() {
     var html = jslider.getHtml();
     var css  = jslider.getCss();
 
     new Previewer(html, css).preview();
-  }
+  };
 
   var update = function() {
     var id       = $id.val();
@@ -86,9 +86,9 @@ window.UI = (function() {
     });
 
     preview();
-  }
+  };
 
   return {
     init: init,
-  }
+  };
 })();

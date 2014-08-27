@@ -13,11 +13,11 @@ window.JSlider = (function() {
 
   JSlider.prototype.getTotalWidth = function() {
     return this.count * this.width;
-  }
+  };
 
   JSlider.prototype.getBoxDelay = function(boxIndex) {
     return parseFloat(((this.duration / this.count) * (boxIndex)).toFixed(3));
-  }
+  };
 
   JSlider.prototype.getHtml = function() {
     var html = '';
@@ -29,7 +29,7 @@ window.JSlider = (function() {
     html += '</div>';
     html += '</div>';
     return html;
-  }
+  };
 
   JSlider.prototype.getCss = function() {
     var id         = '#' + this.id;
@@ -81,7 +81,7 @@ window.JSlider = (function() {
       '';
 
     return css;
-  }
+  };
 
   return JSlider;
 })();
