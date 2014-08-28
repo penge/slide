@@ -79,6 +79,7 @@ window.UI = (function() {
     var height   = parseInt($height.val());
     var duration = parseInt($duration.val());
 
+    var oldJslider = jslider;
     jslider = new JSlider({
       id:       id,
       count:    count,
@@ -89,7 +90,11 @@ window.UI = (function() {
 
     // Re-initialize inputs because jslider instance filters broken inputs 
     initInputs(jslider);
-    preview();
+    
+    // Preview only if jslider has changed
+    if (!jslider.equals(oldJslider)) {
+      preview();
+    }
   };
 
   return {
