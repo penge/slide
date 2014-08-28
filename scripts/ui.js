@@ -3,7 +3,8 @@ window.UI = (function() {
 
   var jslider;
   var inputs;
-  var $id, $count, $width, $height, $duration;
+  var $id, $count, $width, $height, $duration, $totalWidth;
+  var $advanced;
 
   var init = function(settings) {
     jslider   = settings.jslider;
@@ -14,6 +15,8 @@ window.UI = (function() {
     $width    = inputs.$width;
     $height   = inputs.$height;
     $duration = inputs.$duration;
+    $totalWidth = inputs.$totalWidth;
+    $advanced = settings.checkboxes.$advanced;
 
     initInputs(jslider);
     initInputsEvents();
@@ -30,6 +33,7 @@ window.UI = (function() {
     $width.val(jslider.width);
     $height.val(jslider.height);
     $duration.val(jslider.duration);
+    $totalWidth.val(jslider.getTotalWidth());
   };
 
   var initInputsEvents = function() {
