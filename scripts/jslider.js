@@ -97,5 +97,9 @@ window.JSlider = (function() {
     return css;
   };
 
+  JSlider.prototype.equals = function(other) {
+    return JSON.stringify(this) == JSON.stringify(other);
+  };
+
   return JSlider;
 })();
