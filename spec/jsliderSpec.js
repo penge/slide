@@ -26,7 +26,7 @@ describe('JSlider', function() {
       expect(jslider.duration).toBe(100);
     };
 
-    it('properly sets defaults if settings ommited', function() {
+    it('properly sets defaults if settings omitted', function() {
       var jslider = new JSlider();
 
       expectDefaults(jslider);
