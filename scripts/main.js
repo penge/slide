@@ -6,5 +6,9 @@ UI.init({
     $width:    $('#width'),
     $height:   $('#height'),
     $duration: $('#duration'),
+    $totalWidth: $('#total-width'),
+  },
+  checkboxes: {
+    $advanced: $('#advanced'),
   },
 }); 
