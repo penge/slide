@@ -99,6 +99,11 @@ body {
   width: 70px;
 }
 
+.setting.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
 /* Code */
 
 .code {
