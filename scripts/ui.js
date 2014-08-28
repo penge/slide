@@ -15,7 +15,7 @@ window.UI = (function() {
     $height   = inputs.$height;
     $duration = inputs.$duration;
 
-    initInputs();
+    initInputs(jslider);
     initInputsEvents();
 
     initLinks();
@@ -24,7 +24,7 @@ window.UI = (function() {
     preview();
   };
 
-  var initInputs = function() {
+  var initInputs = function(jslider) {
     $id.val(jslider.id);
     $count.val(jslider.count);
     $width.val(jslider.width);
