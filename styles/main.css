@@ -46,6 +46,10 @@ body {
   width: 35%;
 }
 
+#advanced-settings {
+  margin-top: 40px;
+}
+
 #codes {
   float: left;
   width: 65%;
