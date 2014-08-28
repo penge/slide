@@ -3,20 +3,12 @@ window.UI = (function() {
 
   var jslider;
   var inputs;
-  var $id, $count, $width, $height, $duration, $totalWidth;
-  var $advanced;
+  var checkboxes;
 
   var init = function(settings) {
-    jslider   = settings.jslider;
-    inputs    = settings.inputs;
-
-    $id       = inputs.$id;
-    $count    = inputs.$count;
-    $width    = inputs.$width;
-    $height   = inputs.$height;
-    $duration = inputs.$duration;
-    $totalWidth = inputs.$totalWidth;
-    $advanced = settings.checkboxes.$advanced;
+    jslider    = settings.jslider;
+    inputs     = settings.inputs;
+    checkboxes = settings.checkboxes;
 
     initInputs(jslider);
     initInputsEvents();
@@ -28,12 +20,12 @@ window.UI = (function() {
   };
 
   var initInputs = function(jslider) {
-    $id.val(jslider.id);
-    $count.val(jslider.count);
-    $width.val(jslider.width);
-    $height.val(jslider.height);
-    $duration.val(jslider.duration);
-    $totalWidth.val(jslider.getTotalWidth());
+    inputs.$id.val(jslider.id);
+    inputs.$count.val(jslider.count);
+    inputs.$width.val(jslider.width);
+    inputs.$height.val(jslider.height);
+    inputs.$duration.val(jslider.duration);
+    inputs.$totalWidth.val(jslider.getTotalWidth());
   };
 
   var initInputsEvents = function() {
@@ -70,7 +62,7 @@ window.UI = (function() {
   };
 
   var initAdvancedChangeEvent = function() {
-    $advanced.change(function() {
+    checkboxes.$advanced.change(function() {
       var $this = $(this);
       var isChecked = $this.is(':checked');
       var $settings = $this.siblings('.setting');
@@ -87,11 +79,11 @@ window.UI = (function() {
   };
 
   var getOptions = function() {
-    var id       = $id.val();
-    var count    = parseInt($count.val());
-    var width    = parseInt($width.val());
-    var height   = parseInt($height.val());
-    var duration = parseInt($duration.val());
+    var id       = inputs.$id.val();
+    var count    = parseInt(inputs.$count.val());
+    var width    = parseInt(inputs.$width.val());
+    var height   = parseInt(inputs.$height.val());
+    var duration = parseInt(inputs.$duration.val());
 
     return {
       id:       id,
