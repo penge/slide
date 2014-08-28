@@ -37,7 +37,7 @@ window.UI = (function() {
       input.on('keyup', function(e) {
         var code = (e.keyCode || e.which);
         // do nothing if it's an arrow key
-        if(code == 37 || code == 38 || code == 39 || code == 40) {
+        if (code == 37 || code == 38 || code == 39 || code == 40) {
           return;
         }
         update();
