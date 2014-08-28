@@ -24,7 +24,7 @@ window.UI = (function() {
     initLinksEvents();
     initAdvancedChangeEvent();
 
-    preview();
+    preview(jslider);
   };
 
   var initInputs = function(jslider) {
@@ -79,7 +79,7 @@ window.UI = (function() {
     });
   };
 
-  var preview = function() {
+  var preview = function(jslider) {
     var html = jslider.getHtml();
     var css  = jslider.getCss();
 
@@ -111,28 +111,16 @@ window.UI = (function() {
   };
 
   var update = function() {
-    var id       = $id.val();
-    var count    = parseInt($count.val());
-    var width    = parseInt($width.val());
-    var height   = parseInt($height.val());
-    var duration = parseInt($duration.val());
-
-    var oldJslider = jslider;
-    jslider = new JSlider({
-      id:       id,
-      count:    count,
-      width:    width,
-      height:   height,
-      duration: duration, 
-    });
-
-    // Re-initialize inputs because jslider instance filters broken inputs 
-    initInputs(jslider);
+    var options = getOptions();
     
-    // Preview only if jslider has changed
-    if (!jslider.equals(oldJslider)) {
-      preview();
+    // Prevent updating if users' inputs are blank or wrong
+    if (!canUpdate(options)) {
+      return;
     }
+
+    jslider = new JSlider(options);
+    initInputs(jslider);
+    preview(jslider);
   };
 
   return {
