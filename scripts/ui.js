@@ -13,7 +13,11 @@ window.UI = (function() {
     $duration = settings.$duration;
 
     initInputs();
+    initInputsEvents();
+
     initLinks();
+    initLinksEvents();
+
     preview();
   };
 
@@ -23,11 +27,9 @@ window.UI = (function() {
     $width.val(jslider.width);
     $height.val(jslider.height);
     $duration.val(jslider.duration);
-
-    registerInputsEvents();
   };
 
-  var registerInputsEvents = function() {
+  var initInputsEvents = function() {
     var inputs = [$id, $count, $width, $height, $duration];
     $.each(inputs, function(index, input) {
       input.on('keyup', function(e) {
@@ -46,8 +48,6 @@ window.UI = (function() {
   var initLinks = function() {
     $('#html-link').addClass('active');
     $('#css').hide();
-
-    initLinksEvents();
   };
 
   var initLinksEvents = function() {
