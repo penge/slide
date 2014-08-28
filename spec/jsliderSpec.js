@@ -154,4 +154,21 @@ describe('JSlider', function() {
       expect(css).toBe(expectedCss);
     });
   });
+
+  describe('#equals', function() {
+
+    it('returns true for objects with the same settings', function() {
+      var a = new JSlider();
+      var b = new JSlider();
+
+      expect(a).toEqual(b);
+    });
+
+    it('returns false for objects with different settings', function() {
+      var a = new JSlider({ count: 4 });
+      var b = new JSlider({ count: 7 });
+
+      expect(a).not.toEqual(b);
+    });
+  });
 });
