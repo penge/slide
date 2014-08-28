@@ -86,6 +86,30 @@ window.UI = (function() {
     new Previewer(html, css).preview();
   };
 
+  var getOptions = function() {
+    var id       = $id.val();
+    var count    = parseInt($count.val());
+    var width    = parseInt($width.val());
+    var height   = parseInt($height.val());
+    var duration = parseInt($duration.val());
+
+    return {
+      id:       id,
+      count:    count,
+      width:    width,
+      height:   height,
+      duration: duration, 
+    };
+  };
+
+  var canUpdate = function(options) {
+    return options.id.length > 0 &&
+      options.count > 0 &&
+      options.width > 0 &&
+      options.height > 0 &&
+      options.duration > 0;
+  };
+
   var update = function() {
     var id       = $id.val();
     var count    = parseInt($count.val());
