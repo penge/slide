@@ -18,14 +18,30 @@ describe('JSlider', function() {
       expect(jslider.duration).toBe(300);
     });
     
-    it('properly sets defaults for variables', function() {
-      var jslider = new JSlider();
-
+    var expectDefaults = function(jslider) {
       expect(jslider.id).toBe('news');
       expect(jslider.count).toBe(10);
       expect(jslider.width).toBe(200);
       expect(jslider.height).toBe(200);
       expect(jslider.duration).toBe(100);
+    };
+
+    it('properly sets defaults if settings ommited', function() {
+      var jslider = new JSlider();
+
+      expectDefaults(jslider);
+    });
+
+    it('properly sets defaults for invalid settings', function() {
+      var jslider = new JSlider({
+        id: 234,
+        count: 15.8,
+        width: -14,
+        height: 'abc',
+        duration: -90, 
+      });
+
+      expectDefaults(jslider);
     });
   });
 

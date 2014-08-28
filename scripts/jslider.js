@@ -3,13 +3,27 @@ window.JSlider = (function() {
   
   function JSlider(settings) {
     settings = settings ? settings : {};
-    
-    this.id       = settings.id       || 'news';
-    this.count    = settings.count    || 10;
-    this.width    = settings.width    || 200;
-    this.height   = settings.height   || 200;
-    this.duration = settings.duration || 100;
+
+    var id       = settings.id;
+    var count    = settings.count;
+    var width    = settings.width;
+    var height   = settings.height;
+    var duration = settings.duration;
+
+    this.id       = isNonEmptyString(id)        ? id       : 'news';
+    this.count    = isPositiveInteger(count)    ? count    : 10;
+    this.width    = isPositiveInteger(width)    ? width    : 200;
+    this.height   = isPositiveInteger(height)   ? height   : 200;
+    this.duration = isPositiveInteger(duration) ? duration : 100;
   }
+
+  var isNonEmptyString = function(value) {
+    return value && !!value.length;
+  };
+
+  var isPositiveInteger = function(value) {
+    return parseInt(value) === value && value > 0;
+  };
 
   JSlider.prototype.getTotalWidth = function() {
     return this.count * this.width;
