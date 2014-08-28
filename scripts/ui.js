@@ -87,6 +87,8 @@ window.UI = (function() {
       duration: duration, 
     });
 
+    // Re-initialize inputs because jslider instance filters broken inputs 
+    initInputs(jslider);
     preview();
   };
 
