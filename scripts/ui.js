@@ -20,9 +20,9 @@ window.UI = (function() {
 
     initInputs(jslider);
     initInputsEvents();
-
     initLinks();
     initLinksEvents();
+    initAdvancedChangeEvent();
 
     preview();
   };
@@ -66,6 +66,16 @@ window.UI = (function() {
       $(this).addClass('active');
       var codeId = '#' + $(this).attr('id').replace('-link','');
       $(codeId).show();
+    });
+  };
+
+  var initAdvancedChangeEvent = function() {
+    $advanced.change(function() {
+      var $this = $(this);
+      var isChecked = $this.is(':checked');
+      var $settings = $this.siblings('.setting');
+      $settings.toggleClass('disabled', !isChecked); 
+      $settings.find('input').prop('tabindex', isChecked ? 0 : -1);
     });
   };
 
