@@ -15,6 +15,9 @@ body {
   font-weight: 300;
   font-size: 12px;
   text-transform: uppercase;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }
 
 /* Common styles */
@@ -110,6 +113,9 @@ body {
   background: white;
   color: black;
   padding: 20px;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  user-select: text;
 }
 
 /* Media */
