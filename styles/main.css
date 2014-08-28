@@ -50,6 +50,10 @@ body {
   margin-top: 40px;
 }
 
+#advanced-settings #advanced {
+  margin-right: 8px;
+}
+
 #codes {
   float: left;
   width: 65%;
