@@ -2,15 +2,18 @@ window.UI = (function() {
   'use strict';
 
   var jslider;
+  var inputs;
   var $id, $count, $width, $height, $duration;
 
   var init = function(settings) {
     jslider   = settings.jslider;
-    $id       = settings.$id;
-    $count    = settings.$count;
-    $width    = settings.$width;
-    $height   = settings.$height;
-    $duration = settings.$duration;
+    inputs    = settings.inputs;
+
+    $id       = inputs.$id;
+    $count    = inputs.$count;
+    $width    = inputs.$width;
+    $height   = inputs.$height;
+    $duration = inputs.$duration;
 
     initInputs();
     initInputsEvents();
@@ -30,7 +33,6 @@ window.UI = (function() {
   };
 
   var initInputsEvents = function() {
-    var inputs = [$id, $count, $width, $height, $duration];
     $.each(inputs, function(index, input) {
       input.on('keyup', function(e) {
         var code = (e.keyCode || e.which);
