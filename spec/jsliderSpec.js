@@ -9,6 +9,7 @@ describe('JSlider', function() {
         width: 200,
         height: 100,
         duration: 300,
+        customTotalWidth: 1000,
       });
       
       expect(jslider.getId()).toBe('my-news');
@@ -16,6 +17,7 @@ describe('JSlider', function() {
       expect(jslider.getWidth()).toBe(200);
       expect(jslider.getHeight()).toBe(100);
       expect(jslider.getDuration()).toBe(300);
+      expect(jslider.getCustomTotalWidth()).toBe(1000);
     });
     
     var expectDefaults = function(jslider) {
@@ -24,6 +26,7 @@ describe('JSlider', function() {
       expect(jslider.getWidth()).toBe(200);
       expect(jslider.getHeight()).toBe(200);
       expect(jslider.getDuration()).toBe(100);
+      expect(jslider.getCustomTotalWidth()).toBe(2000);
     };
 
     it('properly sets defaults if settings omitted', function() {
