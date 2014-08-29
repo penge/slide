@@ -103,12 +103,8 @@ window.UI = (function() {
     };
   };
 
-  var canUpdate = function(options) {
-    return options.id.length > 0 &&
-      options.count > 0 &&
-      options.width > 0 &&
-      options.height > 0 &&
-      options.duration > 0;
+  var canUpdate = function(settings) {
+    return new JSlider().setSettings(settings);
   };
 
   var update = function() {
