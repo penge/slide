@@ -37,7 +37,7 @@ describe('JSlider', function() {
 
     it('properly sets defaults for invalid settings', function() {
       var jslider = new JSlider({
-        id: 234,
+        id: '234',
         count: 15.8,
         width: -14,
         height: 'abc',

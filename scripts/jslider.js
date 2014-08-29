@@ -57,7 +57,7 @@ window.JSlider = (function() {
   };
 
   JSlider.prototype.setId = function(value) {
-    var ok = isNonEmptyString(value);
+    var ok = isNaN(value) && isNonEmptyString(value);
     this.settings.id = ok ? value : DEFAULTS.id;
     return ok;
   };
