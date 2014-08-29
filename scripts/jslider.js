@@ -21,6 +21,10 @@ window.JSlider = (function() {
     return parseInt(value) === value && value > 0;
   };
 
+  JSlider.prototype.getDefaultSettings = function() {
+    return DEFAULTS;
+  };
+
   JSlider.prototype.getSettings = function() {
     return this.settings;
   };
