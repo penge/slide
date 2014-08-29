@@ -11,19 +11,19 @@ describe('JSlider', function() {
         duration: 300,
       });
       
-      expect(jslider.id).toBe('my-news');
-      expect(jslider.count).toBe(15);
-      expect(jslider.width).toBe(200);
-      expect(jslider.height).toBe(100);
-      expect(jslider.duration).toBe(300);
+      expect(jslider.getId()).toBe('my-news');
+      expect(jslider.getCount()).toBe(15);
+      expect(jslider.getWidth()).toBe(200);
+      expect(jslider.getHeight()).toBe(100);
+      expect(jslider.getDuration()).toBe(300);
     });
     
     var expectDefaults = function(jslider) {
-      expect(jslider.id).toBe('news');
-      expect(jslider.count).toBe(10);
-      expect(jslider.width).toBe(200);
-      expect(jslider.height).toBe(200);
-      expect(jslider.duration).toBe(100);
+      expect(jslider.getId()).toBe('news');
+      expect(jslider.getCount()).toBe(10);
+      expect(jslider.getWidth()).toBe(200);
+      expect(jslider.getHeight()).toBe(200);
+      expect(jslider.getDuration()).toBe(100);
     };
 
     it('properly sets defaults if settings omitted', function() {

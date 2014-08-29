@@ -1,20 +1,16 @@
 window.JSlider = (function() {
   'use strict';
   
+  var DEFAULTS = {
+    id: 'news',
+    count: 10,
+    height: 200,
+    width: 200,
+    duration: 100,
+  };
+
   function JSlider(settings) {
-    settings = settings ? settings : {};
-
-    var id       = settings.id;
-    var count    = settings.count;
-    var width    = settings.width;
-    var height   = settings.height;
-    var duration = settings.duration;
-
-    this.id       = isNonEmptyString(id)        ? id       : 'news';
-    this.count    = isPositiveInteger(count)    ? count    : 10;
-    this.width    = isPositiveInteger(width)    ? width    : 200;
-    this.height   = isPositiveInteger(height)   ? height   : 200;
-    this.duration = isPositiveInteger(duration) ? duration : 100;
+    this.setSettings(settings);
   }
 
   var isNonEmptyString = function(value) {
@@ -25,19 +21,73 @@ window.JSlider = (function() {
     return parseInt(value) === value && value > 0;
   };
 
+  JSlider.prototype.getSettings = function() {
+    return this.settings;
+  };
+
+  JSlider.prototype.setSettings = function(settings) {
+    this.settings = settings ? settings : {};
+
+    this.setId(this.settings.id);
+    this.setCount(this.settings.count);
+    this.setWidth(this.settings.width);
+    this.setHeight(this.settings.height);
+    this.setDuration(this.settings.duration);
+  };
+
+  JSlider.prototype.getId = function() {
+    return this.settings.id;
+  };
+
+  JSlider.prototype.setId = function(value) {
+    this.settings.id = isNonEmptyString(value) ? value : DEFAULTS.id;
+  };
+
+  JSlider.prototype.getCount = function() {
+    return this.settings.count;
+  };
+
+  JSlider.prototype.setCount = function(value) {
+    this.settings.count = isPositiveInteger(value) ? value : DEFAULTS.count;
+  };
+
+  JSlider.prototype.getWidth = function() {
+    return this.settings.width;
+  };
+
+  JSlider.prototype.setWidth = function(value) {
+    this.settings.width = isPositiveInteger(value) ? value : DEFAULTS.width;
+  };
+
+  JSlider.prototype.getHeight = function() {
+    return this.settings.height;
+  };
+
+  JSlider.prototype.setHeight = function(value) {
+    this.settings.height = isPositiveInteger(value) ? value : DEFAULTS.height;
+  };
+
+  JSlider.prototype.getDuration = function() {
+    return this.settings.duration;
+  };
+
+  JSlider.prototype.setDuration = function(value) {
+    this.settings.duration = isPositiveInteger(value) ? value : DEFAULTS.duration;
+  };
+
   JSlider.prototype.getTotalWidth = function() {
-    return this.count * this.width;
+    return this.getCount() * this.getWidth();
   };
 
   JSlider.prototype.getBoxDelay = function(boxIndex) {
-    return parseFloat(((this.duration / this.count) * (boxIndex)).toFixed(3));
+    return parseFloat(((this.getDuration() / this.getCount()) * (boxIndex)).toFixed(3));
   };
 
   JSlider.prototype.getHtml = function() {
     var html = '';
-    html += '<div id="' + this.id + '">';
+    html += '<div id="' + this.getId() + '">';
     html += '<div class="boxes">';
-    for (var i = 0; i < this.count; i++) {
+    for (var i = 0; i < this.getCount(); i++) {
       html += '<div class="box">' + (i + 1) + '</div>';
     }
     html += '</div>';
@@ -46,12 +96,12 @@ window.JSlider = (function() {
   };
 
   JSlider.prototype.getCss = function() {
-    var id         = '#' + this.id;
+    var id         = '#' + this.getId();
     var totalWidth = this.getTotalWidth() + 'px';
-    var width      = this.width + 'px';
-    var height     = this.height + 'px';
-    var duration   = this.duration + 's';
-    var animation  = this.id;
+    var width      = this.getWidth() + 'px';
+    var height     = this.getHeight() + 'px';
+    var duration   = this.getDuration() + 's';
+    var animation  = this.getId();
     var delay      = null;
     var css = '' +
       id + '{' +
@@ -79,7 +129,7 @@ window.JSlider = (function() {
         '-moz-animation:' + animation + ' ' + duration  + ' linear infinite;' +
         '}' +
         '';
-    for(var i = 0, count = this.count; i < count; i++) {
+    for(var i = 0, count = this.getCount(); i < count; i++) {
       delay = this.getBoxDelay(i) + 's';
       css += '' +
         id + ' .boxes .box:nth-child(' + (i + 1) + '){' +
@@ -98,7 +148,7 @@ window.JSlider = (function() {
   };
 
   JSlider.prototype.equals = function(other) {
-    return JSON.stringify(this) == JSON.stringify(other);
+    return JSON.stringify(this.getSettings()) === JSON.stringify(other.getSettings());
   };
 
   return JSlider;

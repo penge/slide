@@ -20,11 +20,11 @@ window.UI = (function() {
   };
 
   var initInputs = function(jslider) {
-    inputs.$id.val(jslider.id);
-    inputs.$count.val(jslider.count);
-    inputs.$width.val(jslider.width);
-    inputs.$height.val(jslider.height);
-    inputs.$duration.val(jslider.duration);
+    inputs.$id.val(jslider.getId());
+    inputs.$count.val(jslider.getCount());
+    inputs.$width.val(jslider.getWidth());
+    inputs.$height.val(jslider.getHeight());
+    inputs.$duration.val(jslider.getDuration());
     inputs.$totalWidth.val(jslider.getTotalWidth());
   };
 
