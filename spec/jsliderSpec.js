@@ -48,6 +48,34 @@ describe('JSlider', function() {
     });
   });
 
+  describe('setters', function() {
+
+    it('returns true/false for correct/incorrect values', function() {
+      var jslider = new JSlider();
+
+      expect(jslider.setId('my-id')).toBe(true);
+      expect(jslider.setId(543)).toBe(false);
+
+      expect(jslider.setCount(10)).toBe(true);
+      expect(jslider.setCount(-3)).toBe(false);
+
+      expect(jslider.setWidth(200)).toBe(true);
+      expect(jslider.setWidth(200.7833)).toBe(false);
+
+      expect(jslider.setHeight(200)).toBe(true);
+      expect(jslider.setHeight(-200)).toBe(false);
+
+      expect(jslider.setDuration(100)).toBe(true);
+      expect(jslider.setDuration(100.2)).toBe(false);
+
+      expect(jslider.setCustomTotalWidth(1000)).toBe(true);
+      expect(jslider.setCustomTotalWidth('1000')).toBe(false);
+
+      expect(jslider.setSettings({count: 4})).toBe(true);
+      expect(jslider.setSettings({count: -4})).toBe(false);
+    });
+  });
+
   describe('#getTotalWidth', function() {
 
     it('returns correct total width', function() {
