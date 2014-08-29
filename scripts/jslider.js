@@ -111,6 +111,7 @@ window.JSlider = (function() {
 
   JSlider.prototype.getCss = function() {
     var id         = '#' + this.getId();
+    var customTotalWidth = this.getCustomTotalWidth() + 'px';
     var totalWidth = this.getTotalWidth() + 'px';
     var width      = this.getWidth() + 'px';
     var height     = this.getHeight() + 'px';
@@ -125,7 +126,7 @@ window.JSlider = (function() {
       id + ' .boxes{' +
         'overflow:hidden;' +
         'position:relative;' +
-        'width:' + totalWidth + ';' +
+        'width:' + customTotalWidth + ';' +
         'height:' + height + ';' +
         'margin-left:-' + width + ';' +
         '}' +
