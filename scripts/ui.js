@@ -25,6 +25,11 @@ window.UI = (function() {
     inputs.$width.val(jslider.getWidth());
     inputs.$height.val(jslider.getHeight());
     inputs.$duration.val(jslider.getDuration());
+
+    initAdvancedInputs(jslider);
+  };
+
+  var initAdvancedInputs = function(jslider) {
     inputs.$customTotalWidth.val(jslider.getCustomTotalWidth());
   };
 
