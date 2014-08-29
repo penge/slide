@@ -38,15 +38,15 @@ window.JSlider = (function() {
   };
 
   JSlider.prototype.setSettings = function(settings) {
-    var settings = settings ? settings : {};
+    var _settings = settings ? settings : {};
 
     var oks = [
-      settings.id ? this.setId(settings.id) : true,
-      settings.count ? this.setCount(settings.count) : true,
-      settings.width ? this.setWidth(settings.width) : true,
-      settings.height ? this.setHeight(settings.height) : true,
-      settings.duration ? this.setDuration(settings.duration) : true,
-      settings.customTotalWidth ? this.setCustomTotalWidth(settings.customTotalWidth) : true,
+      settings.id ? this.setId(_settings.id) : true,
+      settings.count ? this.setCount(_settings.count) : true,
+      settings.width ? this.setWidth(_settings.width) : true,
+      settings.height ? this.setHeight(_settings.height) : true,
+      settings.duration ? this.setDuration(_settings.duration) : true,
+      settings.customTotalWidth ? this.setCustomTotalWidth(_settings.customTotalWidth) : true,
     ];
 
     return oks.indexOf(false) === -1;
