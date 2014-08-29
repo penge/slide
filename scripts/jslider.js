@@ -11,7 +11,14 @@ window.JSlider = (function() {
   };
 
   function JSlider(settings) {
-    this.setSettings(settings);
+    this.settings = settings ? settings : {};
+
+    this.setId(this.settings.id);
+    this.setCount(this.settings.count);
+    this.setWidth(this.settings.width);
+    this.setHeight(this.settings.height);
+    this.setDuration(this.settings.duration);
+    this.setCustomTotalWidth(this.settings.customTotalWidth);
   }
 
   var isNonEmptyString = function(value) {
@@ -31,14 +38,18 @@ window.JSlider = (function() {
   };
 
   JSlider.prototype.setSettings = function(settings) {
-    this.settings = settings ? settings : {};
+    var settings = settings ? settings : {};
 
-    this.setId(this.settings.id);
-    this.setCount(this.settings.count);
-    this.setWidth(this.settings.width);
-    this.setHeight(this.settings.height);
-    this.setDuration(this.settings.duration);
-    this.setCustomTotalWidth(this.settings.customTotalWidth);
+    var oks = [
+      settings.id ? this.setId(settings.id) : true,
+      settings.count ? this.setCount(settings.count) : true,
+      settings.width ? this.setWidth(settings.width) : true,
+      settings.height ? this.setHeight(settings.height) : true,
+      settings.duration ? this.setDuration(settings.duration) : true,
+      settings.customTotalWidth ? this.setCustomTotalWidth(settings.customTotalWidth) : true,
+    ];
+
+    return oks.indexOf(false) === -1;
   };
 
   JSlider.prototype.getId = function() {
@@ -46,7 +57,9 @@ window.JSlider = (function() {
   };
 
   JSlider.prototype.setId = function(value) {
-    this.settings.id = isNonEmptyString(value) ? value : DEFAULTS.id;
+    var ok = isNonEmptyString(value);
+    this.settings.id = ok ? value : DEFAULTS.id;
+    return ok;
   };
 
   JSlider.prototype.getCount = function() {
@@ -54,7 +67,9 @@ window.JSlider = (function() {
   };
 
   JSlider.prototype.setCount = function(value) {
-    this.settings.count = isPositiveInteger(value) ? value : DEFAULTS.count;
+    var ok = isPositiveInteger(value);
+    this.settings.count = ok ? value : DEFAULTS.count;
+    return ok;
   };
 
   JSlider.prototype.getWidth = function() {
@@ -62,7 +77,9 @@ window.JSlider = (function() {
   };
 
   JSlider.prototype.setWidth = function(value) {
-    this.settings.width = isPositiveInteger(value) ? value : DEFAULTS.width;
+    var ok = isPositiveInteger(value);
+    this.settings.width = ok ? value : DEFAULTS.width;
+    return ok;
   };
 
   JSlider.prototype.getHeight = function() {
@@ -70,7 +87,9 @@ window.JSlider = (function() {
   };
 
   JSlider.prototype.setHeight = function(value) {
-    this.settings.height = isPositiveInteger(value) ? value : DEFAULTS.height;
+    var ok = isPositiveInteger(value);
+    this.settings.height = ok ? value : DEFAULTS.height;
+    return ok;
   };
 
   JSlider.prototype.getDuration = function() {
@@ -78,7 +97,9 @@ window.JSlider = (function() {
   };
 
   JSlider.prototype.setDuration = function(value) {
-    this.settings.duration = isPositiveInteger(value) ? value : DEFAULTS.duration;
+    var ok = isPositiveInteger(value);
+    this.settings.duration = ok ? value : DEFAULTS.duration;
+    return ok;
   };
 
   JSlider.prototype.getTotalWidth = function() {
@@ -90,7 +111,9 @@ window.JSlider = (function() {
   };
 
   JSlider.prototype.setCustomTotalWidth = function(value) {
-    this.settings.customTotalWidth = isPositiveInteger(value) ? value : DEFAULTS.customTotalWidth; 
+    var ok = isPositiveInteger(value);
+    this.settings.customTotalWidth = ok ? value : DEFAULTS.customTotalWidth; 
+    return ok;
   };
 
   JSlider.prototype.getBoxDelay = function(boxIndex) {
