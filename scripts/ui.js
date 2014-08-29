@@ -87,20 +87,20 @@ window.UI = (function() {
     new Previewer(html, css).preview();
   };
 
-  var getOptions = function() {
-    var id       = inputs.$id.val();
-    var count    = parseInt(inputs.$count.val());
-    var width    = parseInt(inputs.$width.val());
-    var height   = parseInt(inputs.$height.val());
-    var duration = parseInt(inputs.$duration.val());
-
-    return {
-      id:       id,
-      count:    count,
-      width:    width,
-      height:   height,
-      duration: duration, 
+  var getSettings = function() {
+    var settings = {
+      id:       inputs.$id.val(),
+      count:    parseInt(inputs.$count.val()),
+      width:    parseInt(inputs.$width.val()),
+      height:   parseInt(inputs.$height.val()),
+      duration: parseInt(inputs.$duration.val()),
     };
+
+    if (isAdvancedEdit()) {
+      settings.customTotalWidth = parseInt(inputs.$customTotalWidth.val());
+    }
+
+    return settings;
   };
 
   var canUpdate = function(settings) {
@@ -108,15 +108,17 @@ window.UI = (function() {
   };
 
   var update = function() {
-    var options = getOptions();
+    var settings = getSettings();
     
     // Prevent updating if users' inputs are blank or wrong
-    if (!canUpdate(options)) {
+    if (!canUpdate(settings)) {
       return;
     }
 
-    jslider = new JSlider(options);
-    initInputs(jslider);
+    jslider = new JSlider(settings);
+    if (!isAdvancedEdit()) {
+      initAdvancedInputs(jslider);
+    }
     preview(jslider);
   };
 
