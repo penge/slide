@@ -76,6 +76,10 @@ window.UI = (function() {
     });
   };
 
+  var isAdvancedEdit = function() {
+    return checkboxes.$advanced.is(':checked');
+  };
+
   var preview = function(jslider) {
     var html = jslider.getHtml();
     var css  = jslider.getCss();
