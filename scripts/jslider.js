@@ -7,6 +7,7 @@ window.JSlider = (function() {
     height: 200,
     width: 200,
     duration: 100,
+    customTotalWidth: null,
   };
 
   function JSlider(settings) {
@@ -37,6 +38,7 @@ window.JSlider = (function() {
     this.setWidth(this.settings.width);
     this.setHeight(this.settings.height);
     this.setDuration(this.settings.duration);
+    this.setCustomTotalWidth(this.settings.customTotalWidth);
   };
 
   JSlider.prototype.getId = function() {
@@ -81,6 +83,14 @@ window.JSlider = (function() {
 
   JSlider.prototype.getTotalWidth = function() {
     return this.getCount() * this.getWidth();
+  };
+
+  JSlider.prototype.getCustomTotalWidth = function() {
+    return this.settings.customTotalWidth || this.getTotalWidth();
+  };
+
+  JSlider.prototype.setCustomTotalWidth = function(value) {
+    this.settings.customTotalWidth = isPositiveInteger(value) ? value : DEFAULTS.customTotalWidth; 
   };
 
   JSlider.prototype.getBoxDelay = function(boxIndex) {
