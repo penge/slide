@@ -41,12 +41,12 @@ window.JSlider = (function() {
     var _settings = settings ? settings : {};
 
     var oks = [
-      settings.id ? this.setId(_settings.id) : true,
-      settings.count ? this.setCount(_settings.count) : true,
-      settings.width ? this.setWidth(_settings.width) : true,
-      settings.height ? this.setHeight(_settings.height) : true,
-      settings.duration ? this.setDuration(_settings.duration) : true,
-      settings.customTotalWidth ? this.setCustomTotalWidth(_settings.customTotalWidth) : true,
+      _settings.id ? this.setId(_settings.id) : true,
+      _settings.count ? this.setCount(_settings.count) : true,
+      _settings.width ? this.setWidth(_settings.width) : true,
+      _settings.height ? this.setHeight(_settings.height) : true,
+      _settings.duration ? this.setDuration(_settings.duration) : true,
+      _settings.customTotalWidth ? this.setCustomTotalWidth(_settings.customTotalWidth) : true,
     ];
 
     return oks.indexOf(false) === -1;
