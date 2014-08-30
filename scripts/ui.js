@@ -125,19 +125,27 @@ window.UI = (function() {
     return settings;
   };
 
-  var canUpdate = function(settings) {
-    return new JSlider().setSettings(settings);
+  var reinitInputs = function(sender) {
+    if (sender != 'count' && sender != 'width') {
+      return;
+    }
+
+    initCustomWidthInputs(jslider);
+    if (!isActive(inputs.$customTotalWidth)) {
+      initCustomTotalWidthInput(jslider);
+    }
   };
 
   var update = function(sender) {
     var settings = getSettings();
     
     // Prevent updating if users' inputs are blank or wrong
-    if (!canUpdate(settings)) {
+    if (!JSlider.areSettingsValid(settings)) {
       return;
     }
 
     jslider = new JSlider(settings);
+    reinitInputs(sender);
     preview(jslider);
   };
 
