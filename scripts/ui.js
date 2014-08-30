@@ -14,7 +14,7 @@ window.UI = (function() {
     initInputsEvents();
     initLinks();
     initLinksEvents();
-    initAdvancedChangeEvent();
+    initCheckboxesEvents();
 
     preview(jslider);
   };
@@ -70,13 +70,13 @@ window.UI = (function() {
     });
   };
 
-  var initAdvancedChangeEvent = function() {
-    checkboxes.$advanced.change(function() {
+  var initCheckboxesEvents = function() {
+    $(document).on('change', '.checkbox', function() {
       var $this = $(this);
       var isChecked = $this.is(':checked');
-      var $settings = $this.siblings('.setting');
-      $settings.toggleClass('disabled', !isChecked); 
-      $settings.find('input').prop('tabindex', isChecked ? 0 : -1);
+      var $setting = $this.closest('.setting');
+      $setting.toggleClass('active', isChecked); 
+      $setting.find('.input').prop('tabindex', isChecked ? 0 : -1);
     });
   };
 
