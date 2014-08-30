@@ -19,14 +19,16 @@
 
   <div id="settings">
     <div class="title">Settings</div>
-    <div class="setting"><span>ID?</span><input id="id"></div>
-    <div class="setting"><span>How many?</span><input id="count" type="number" min="2">boxes</div>
-    <div class="setting"><span>Width of each?</span><input id="width" type="number" min="10">px</div>
-    <div class="setting"><span>Height of each?</span><input id="height" type="number" min="10">px</div>
-    <div class="setting"><span>Duration?</span><input id="duration" type="number" min="10">sec</div>
+    <div class="setting"><div>ID?</div><input id="id"></div>
+    <div class="setting"><div>How many?</div><input id="count" type="number" min="2">boxes</div>
+    <div class="setting"><div>Width of each?</div><input id="width" type="number" min="10">px</div>
+    <div class="setting"><div>Height of each?</div><input id="height" type="number" min="10">px</div>
+    <div class="setting"><div>Duration?</div><input id="duration" type="number" min="10">sec</div>
     <div id="advanced-settings">
       <input id="advanced" type="checkbox" value="advanced">Edit advanced settings
-      <div class="setting disabled"><span>Total width?</span><input id="custom-total-width" tabindex="-1" type="number" min="10">px</div>
+      <div class="setting disabled"><div>Total width?</div><input id="custom-total-width" tabindex="-1" type="number" min="10">px</div>
+      <div id="custom-widths">
+      </div>
     </div>
   </div>
   
