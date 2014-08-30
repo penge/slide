@@ -29,6 +29,14 @@ window.UI = (function() {
     el.removeClass('active');
   };
 
+  var getKeyCode = function(e) {
+    return (e.keyCode || e.which);
+  };
+
+  var isAnArrowKey = function(code) {
+    return code == 37 || code == 38 || code == 39 || code == 40;
+  };
+
   var initInputs = function(jslider) {
     inputs.$id.val(jslider.getId());
     inputs.$count.val(jslider.getCount());
@@ -60,14 +68,6 @@ window.UI = (function() {
       buffer.push($template.html());
     }
     return buffer;
-  };
-
-  var getKeyCode = function(e) {
-      return (e.keyCode || e.which);
-  };
-
-  var isAnArrowKey = function(code) {
-    return code == 37 || code == 38 || code == 39 || code == 40;
   };
 
   var initInputsEvents = function() {
