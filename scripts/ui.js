@@ -37,10 +37,29 @@ window.UI = (function() {
     inputs.$duration.val(jslider.getDuration());
 
     initCustomTotalWidthInput(jslider);
+    initCustomWidthInputs(jslider);
   };
 
   var initCustomTotalWidthInput = function(jslider) {
     inputs.$customTotalWidth.val(jslider.getCustomTotalWidth());
+  };
+
+  var initCustomWidthInputs = function(jslider) {
+    var $settings = $('#settings');
+    $settings.find('.custom-width-setting').remove();
+    $settings.append(createCustomWidthInputs(jslider));
+  };
+
+  var createCustomWidthInputs = function(jslider) {
+    var buffer = [];
+    var $template = $('#custom-width-template').clone();
+
+    for (var i = 0, count = jslider.getCount(); i < count; i++) {
+      $template.find('.id').text(i + 1);
+      $template.find('input').attr('value', jslider.getWidth());
+      buffer.push($template.html());
+    }
+    return buffer;
   };
 
   var getKeyCode = function(e) {
