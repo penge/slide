@@ -84,13 +84,6 @@ window.UI = (function() {
     return checkboxes.$advanced.is(':checked');
   };
 
-  var preview = function(jslider) {
-    var html = jslider.getHtml();
-    var css  = jslider.getCss();
-
-    new Previewer(html, css).preview();
-  };
-
   var getSettings = function() {
     var settings = {
       id:       inputs.$id.val(),
@@ -124,6 +117,13 @@ window.UI = (function() {
       initAdvancedInputs(jslider);
     }
     preview(jslider);
+  };
+
+  var preview = function(jslider) {
+    var html = jslider.getHtml();
+    var css  = jslider.getCss();
+
+    new Previewer(html, css).preview();
   };
 
   return {
