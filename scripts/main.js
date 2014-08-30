@@ -8,7 +8,4 @@ UI.init({
     $duration: $('#duration'),
     $customTotalWidth: $('#custom-total-width'),
   },
-  checkboxes: {
-    $advanced: $('#advanced'),
-  },
 }); 
