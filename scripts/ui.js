@@ -33,18 +33,22 @@ window.UI = (function() {
     inputs.$customTotalWidth.val(jslider.getCustomTotalWidth());
   };
 
+  var getKeyCode = function(e) {
+      return (e.keyCode || e.which);
+  };
+
+  var isAnArrowKey = function(code) {
+    return code == 37 || code == 38 || code == 39 || code == 40;
+  };
+
   var initInputsEvents = function() {
-    $.each(inputs, function(index, input) {
-      input.on('keyup', function(e) {
-        var code = (e.keyCode || e.which);
-        // do nothing if it's an arrow key
-        if (code == 37 || code == 38 || code == 39 || code == 40) {
-          return;
-        }
-        update();
-      }).on('change', function() {
-        update();
-      });
+    $(document).on('keyup', '.input', function(e) {
+      if (isAnArrowKey(getKeyCode(e))) {
+        return;
+      }
+      update($(this).attr('id'));
+    }).on('change', '.input', function() {
+      update($(this).attr('id'));
     });
   };
 
@@ -107,7 +111,7 @@ window.UI = (function() {
     return new JSlider().setSettings(settings);
   };
 
-  var update = function() {
+  var update = function(sender) {
     var settings = getSettings();
     
     // Prevent updating if users' inputs are blank or wrong
