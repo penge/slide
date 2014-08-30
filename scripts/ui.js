@@ -19,6 +19,18 @@ window.UI = (function() {
     preview(jslider);
   };
 
+  var isActive = function(el) {
+    return el.hasClass('active'); 
+  };
+
+  var activate = function(el) {
+    el.addClass('active');
+  };
+
+  var deactivate = function(el) {
+    el.removeClass('active');
+  };
+
   var initInputs = function(jslider) {
     inputs.$id.val(jslider.getId());
     inputs.$count.val(jslider.getCount());
@@ -53,18 +65,18 @@ window.UI = (function() {
   };
 
   var initLinks = function() {
-    $('#html-link').addClass('active');
+    activate($('#html-link'));
     $('#css').hide();
   };
 
   var initLinksEvents = function() {
-    $('.link').click(function() {
+    $(document).on('click', '.link', function() {
       // deactive all links, hide all codes
-      $('.link').removeClass('active');
+      deactivate($('.link'));
       $('.code').hide();
       
       // activate specific link, show specific code
-      $(this).addClass('active');
+      activate($(this));
       var codeId = '#' + $(this).attr('id').replace('-link','');
       $(codeId).show();
     });
