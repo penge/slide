@@ -19,16 +19,36 @@
 
   <div id="settings">
     <div class="title">Settings</div>
-    <div class="setting"><div>ID?</div><input id="id"></div>
-    <div class="setting"><div>How many?</div><input id="count" type="number" min="2">boxes</div>
-    <div class="setting"><div>Width of each?</div><input id="width" type="number" min="10">px</div>
-    <div class="setting"><div>Height of each?</div><input id="height" type="number" min="10">px</div>
-    <div class="setting"><div>Duration?</div><input id="duration" type="number" min="10">sec</div>
-    <div id="advanced-settings">
-      <input id="advanced" type="checkbox" value="advanced">Edit advanced settings
-      <div class="setting disabled"><div>Total width?</div><input id="custom-total-width" tabindex="-1" type="number" min="10">px</div>
-      <div id="custom-widths">
-      </div>
+
+    <div class="setting active">
+      <div>ID?</div>
+      <input id="id" class="input">
+    </div>
+
+    <div class="setting active">
+      <div>How many?</div>
+      <input id="count" class="input" type="number" min="2">boxes
+    </div>
+
+    <div class="setting active">
+      <div>Width of each?</div>
+      <input id="width" class="input" type="number" min="10">px
+    </div>
+
+    <div class="setting active">
+      <div>Height of each?</div>
+      <input id="height" class="input" type="number" min="10">px
+    </div>
+
+    <div class="setting active">
+      <div>Duration?</div>
+      <input id="duration" class="input" type="number" min="10">sec
+    </div>
+
+    <div class="setting">
+      <div>Total width?</div>
+      <input id="custom-total-width" class="input" tabindex="-1" type="number" min="10">px
+      <input id="advanced" class="checkbox" type="checkbox" value="advanced">
     </div>
   </div>
   
@@ -37,6 +57,16 @@
     <div id="css-link" class="title link">CSS</div> 
     <div id="html" class="code"></div>
     <div id="css" class="code"></div>
+  </div>
+
+  <div id="templates">
+    <div id="custom-width-template">
+      <div class="setting custom-width-setting">
+        <div>Width <span class="id"></span></div>
+        <input class="input" tabindex="-1" type="number" min="10">px
+        <input id="advanced" class="checkbox" type="checkbox" value="advanced">
+      </div>
+    </div>
   </div>
 
   <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
