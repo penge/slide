@@ -3,12 +3,10 @@ window.UI = (function() {
 
   var jslider;
   var inputs;
-  var checkboxes;
 
   var init = function(settings) {
     jslider    = settings.jslider;
     inputs     = settings.inputs;
-    checkboxes = settings.checkboxes;
 
     initInputs(jslider);
     initInputsEvents();
@@ -92,10 +90,6 @@ window.UI = (function() {
     });
   };
 
-  var isAdvancedEdit = function() {
-    return checkboxes.$advanced.is(':checked');
-  };
-
   var getSettings = function() {
     var settings = {
       id:       inputs.$id.val(),
@@ -105,7 +99,7 @@ window.UI = (function() {
       duration: parseInt(inputs.$duration.val()),
     };
 
-    if (isAdvancedEdit()) {
+    if (isActive(inputs.$customTotalWidth.closest('.setting'))) {
       settings.customTotalWidth = parseInt(inputs.$customTotalWidth.val());
     }
 
@@ -125,9 +119,6 @@ window.UI = (function() {
     }
 
     jslider = new JSlider(settings);
-    if (!isAdvancedEdit()) {
-      initAdvancedInputs(jslider);
-    }
     preview(jslider);
   };
 
