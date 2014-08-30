@@ -52,6 +52,10 @@ window.JSlider = (function() {
     return oks.indexOf(false) === -1;
   };
 
+  JSlider.areSettingsValid = function(settings) {
+    return new JSlider().setSettings(settings); 
+  };
+
   JSlider.prototype.getId = function() {
     return this.settings.id;
   };
