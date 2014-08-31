@@ -5,8 +5,8 @@ window.UI = (function() {
   var inputs;
 
   var init = function(settings) {
-    jslider    = settings.jslider;
-    inputs     = settings.inputs;
+    jslider = settings.jslider;
+    inputs = settings.inputs;
 
     initInputs(jslider);
     initInputsEvents();
@@ -40,31 +40,31 @@ window.UI = (function() {
   var initInputs = function(jslider) {
     inputs.$id.val(jslider.getId());
     inputs.$count.val(jslider.getCount());
-    inputs.$width.val(jslider.getWidth());
+    inputs.$widths.val(jslider.getWidths());
     inputs.$height.val(jslider.getHeight());
     inputs.$duration.val(jslider.getDuration());
 
-    initCustomTotalWidthInput(jslider);
-    initCustomWidthInputs(jslider);
+    initWidthInput(jslider);
+    initWidthsInputs(jslider);
   };
 
-  var initCustomTotalWidthInput = function(jslider) {
-    inputs.$customTotalWidth.val(jslider.getCustomTotalWidth());
+  var initWidthInput = function(jslider) {
+    inputs.$width.val(jslider.getWidth() || jslider.getTotalWidth());
   };
 
-  var initCustomWidthInputs = function(jslider) {
+  var initWidthsInputs = function(jslider) {
     var $settings = $('#settings');
-    $settings.find('.custom-width-setting').remove();
-    $settings.append(createCustomWidthInputs(jslider));
+    $settings.find('.widths-setting').remove();
+    $settings.append(createWidthsInputs(jslider));
   };
 
-  var createCustomWidthInputs = function(jslider) {
+  var createWidthsInputs = function(jslider) {
     var buffer = [];
-    var $template = $('#custom-width-template').clone();
+    var $template = $('#widths-template').clone();
 
     for (var i = 0, count = jslider.getCount(); i < count; i++) {
       $template.find('.id').text(i + 1);
-      $template.find('input').attr('value', jslider.getWidth());
+      $template.find('input').attr('value', jslider.getBoxWidth(i));
       buffer.push($template.html());
     }
     return buffer;
@@ -106,6 +106,9 @@ window.UI = (function() {
       var $setting = $this.closest('.setting');
       $setting.toggleClass('active', isChecked); 
       $setting.find('.input').prop('tabindex', isChecked ? 0 : -1);
+      if (!isChecked) {
+        update('checkbox');
+      }
     });
   };
 
@@ -113,27 +116,31 @@ window.UI = (function() {
     var settings = {
       id:       inputs.$id.val(),
       count:    parseInt(inputs.$count.val()),
-      width:    parseInt(inputs.$width.val()),
+      widths:   parseInt(inputs.$widths.val()),
       height:   parseInt(inputs.$height.val()),
       duration: parseInt(inputs.$duration.val()),
     };
 
-    if (isActive(inputs.$customTotalWidth.closest('.setting'))) {
-      settings.customTotalWidth = parseInt(inputs.$customTotalWidth.val());
+    if (isActive(inputs.$width.closest('.setting'))) {
+      settings.width = parseInt(inputs.$width.val());
     }
 
     return settings;
   };
 
-  var reinitInputs = function(sender) {
-    if (sender != 'count' && sender != 'width') {
+  var reinitInputs = function(sender, jslider) {
+    var allowedSenders = [
+      'count',
+      'widths',
+      'checkbox',
+    ];
+    
+    if (allowedSenders.indexOf(sender) == -1) {
       return;
     }
 
-    initCustomWidthInputs(jslider);
-    if (!isActive(inputs.$customTotalWidth)) {
-      initCustomTotalWidthInput(jslider);
-    }
+    initWidthInput(jslider);
+    initWidthsInputs(jslider);
   };
 
   var update = function(sender) {
@@ -145,7 +152,7 @@ window.UI = (function() {
     }
 
     jslider = new JSlider(settings);
-    reinitInputs(sender);
+    reinitInputs(sender, jslider);
     preview(jslider);
   };
 
