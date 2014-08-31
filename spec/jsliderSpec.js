@@ -189,6 +189,33 @@ describe('JSlider', function() {
     });
   });
 
+  describe('#getBoxOffset', function() {
+
+    it('returns correct box offset // widths is a integer', function() {
+      var jslider = new JSlider({
+        count: 3,
+        widths: 300,
+        duration: 100,
+      });
+
+      expect(jslider.getBoxOffset(0)).toBe(0);
+      expect(jslider.getBoxOffset(1)).toBe(300);
+      expect(jslider.getBoxOffset(2)).toBe(600);
+    });
+
+    it('returns correct box offset // widths is an array', function() {
+      var jslider = new JSlider({
+        count: 3,
+        widths: [400, 150, 100],
+        duration: 100,
+      });
+
+      expect(jslider.getBoxOffset(0)).toBe(0);
+      expect(jslider.getBoxOffset(1)).toBe(400);
+      expect(jslider.getBoxOffset(2)).toBe(550);
+    });
+  });
+
   describe('#getHtml', function() {
 
     it('returns correct html string', function() {
