@@ -110,15 +110,22 @@ describe('JSlider', function() {
 
   describe('#getTotalWidth', function() {
 
-    it('returns correct total width', function() {
+    it('returns correct total width // widths is an integer', function() {
       var jslider = new JSlider({
         count: 5,
-        width: 300,
+        widths: 300,
       });
-      var width = jslider.getTotalWidth();
-      var expectedWidth = 1500;
 
-      expect(width).toBe(expectedWidth);
+      expect(jslider.getTotalWidth()).toBe(1500);
+    });
+
+    it('returns correct total width // widths is an array', function() {
+      var jslider = new JSlider({
+        count: 5,
+        widths: [100, 100, 100, 200, 300],
+      });
+
+      expect(jslider.getTotalWidth()).toBe(800);
     });
   });
 
