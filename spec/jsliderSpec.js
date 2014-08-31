@@ -84,17 +84,24 @@ describe('JSlider', function() {
       expect(jslider.setCount(10)).toBe(true);
       expect(jslider.setCount(-3)).toBe(false);
 
-      expect(jslider.setWidth(200)).toBe(true);
-      expect(jslider.setWidth(200.7833)).toBe(false);
+      expect(jslider.setWidths(200)).toBe(true);
+      expect(jslider.setWidths(200.7833)).toBe(false);
+
+      jslider.setCount(3);
+      expect(jslider.setWidths([200, 300, 300])).toBe(true);
+      expect(jslider.setWidths([200])).toBe(false);
+      expect(jslider.setWidths([200, 300, 300, 300])).toBe(false);
+      expect(jslider.setWidths([200, 300, -300])).toBe(false);
+      expect(jslider.setWidths(['a', 'b', 'c'])).toBe(false);
+
+      expect(jslider.setWidth(1000)).toBe(true);
+      expect(jslider.setWidth('1000')).toBe(false);
 
       expect(jslider.setHeight(200)).toBe(true);
       expect(jslider.setHeight(-200)).toBe(false);
 
       expect(jslider.setDuration(100)).toBe(true);
       expect(jslider.setDuration(100.2)).toBe(false);
-
-      expect(jslider.setCustomTotalWidth(1000)).toBe(true);
-      expect(jslider.setCustomTotalWidth('1000')).toBe(false);
 
       expect(jslider.setSettings({count: 4})).toBe(true);
       expect(jslider.setSettings({count: -4})).toBe(false);
