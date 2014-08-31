@@ -1,32 +1,57 @@
 describe('JSlider', function() {
 
-  describe('construction', function() {
+  describe('initialization', function() {
 
-    it('properly sets variables', function() {
+    it('properly sets variables // widths is integer', function() {
       var jslider = new JSlider({
         id: 'my-news',
-        count: 15,
-        width: 200,
+        count: 4,
+        widths: 200,
+        width: 600,
         height: 100,
         duration: 300,
-        customTotalWidth: 1000,
       });
       
       expect(jslider.getId()).toBe('my-news');
-      expect(jslider.getCount()).toBe(15);
-      expect(jslider.getWidth()).toBe(200);
+      expect(jslider.getCount()).toBe(4);
+      expect(jslider.getWidths()).toBe(200);
+      expect(jslider.getWidth()).toBe(600);
       expect(jslider.getHeight()).toBe(100);
       expect(jslider.getDuration()).toBe(300);
-      expect(jslider.getCustomTotalWidth()).toBe(1000);
+      expect(jslider.getTotalWidth()).toBe(800); // 200 * 4
+    });
+
+    it('properly sets variables // widths is an array', function() {
+      jslider = new JSlider({
+        id: 'my-news',
+        count: 4,
+        widths: [200, 100, 600, 100],
+        width: 700,
+        height: 200,
+        duration: 400,
+      });
+
+      expect(jslider.getId()).toBe('my-news');
+      expect(jslider.getCount()).toBe(4);
+      expect(jslider.getWidths().length).toBe(4);
+      expect(jslider.getWidths()[0]).toBe(200);
+      expect(jslider.getWidths()[1]).toBe(100);
+      expect(jslider.getWidths()[2]).toBe(600);
+      expect(jslider.getWidths()[3]).toBe(100);
+      expect(jslider.getHeight()).toBe(200);
+      expect(jslider.getDuration()).toBe(400);
+      expect(jslider.getWidth()).toBe(700);
+      expect(jslider.getTotalWidth()).toBe(1000); // 200 + 100 + 600 + 100
     });
     
     var expectDefaults = function(jslider) {
       expect(jslider.getId()).toBe('news');
       expect(jslider.getCount()).toBe(10);
-      expect(jslider.getWidth()).toBe(200);
+      expect(jslider.getWidths()).toBe(200);
+      expect(jslider.getWidth()).toBe(null);
       expect(jslider.getHeight()).toBe(200);
       expect(jslider.getDuration()).toBe(100);
-      expect(jslider.getCustomTotalWidth()).toBe(2000);
+      expect(jslider.getTotalWidth()).toBe(2000);
     };
 
     it('properly sets defaults if settings omitted', function() {
@@ -39,7 +64,7 @@ describe('JSlider', function() {
       var jslider = new JSlider({
         id: '234',
         count: 15.8,
-        width: -14,
+        widths: -14,
         height: 'abc',
         duration: -90, 
       });
