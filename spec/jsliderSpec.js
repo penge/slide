@@ -242,7 +242,7 @@ describe('JSlider', function() {
       var jslider = new JSlider({
         id: 'images',
         count: 3,
-        width: 500,
+        widths: 500,
         height: 300,
         duration: 150,
       });
