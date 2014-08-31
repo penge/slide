@@ -162,6 +162,33 @@ describe('JSlider', function() {
     });
   });
 
+  describe('#getBoxWidth', function() {
+
+    it('returns correct box width // widths is a integer', function() {
+      var jslider = new JSlider({
+        count: 3,
+        widths: 300,
+        duration: 100,
+      });
+
+      expect(jslider.getBoxWidth(0)).toBe(300);
+      expect(jslider.getBoxWidth(1)).toBe(300);
+      expect(jslider.getBoxWidth(2)).toBe(300);
+    });
+
+    it('returns correct box width // widths is an array', function() {
+      var jslider = new JSlider({
+        count: 3,
+        widths: [300, 200, 75],
+        duration: 100,
+      });
+
+      expect(jslider.getBoxWidth(0)).toBe(300);
+      expect(jslider.getBoxWidth(1)).toBe(200);
+      expect(jslider.getBoxWidth(2)).toBe(75);
+    });
+  });
+
   describe('#getHtml', function() {
 
     it('returns correct html string', function() {
