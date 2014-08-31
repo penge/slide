@@ -131,17 +131,34 @@ describe('JSlider', function() {
 
   describe('#getBoxDelay', function() {
 
-    it('returns correct box delay', function() {
+    it('returns correct box delay // widths is a integer', function() {
       var jslider = new JSlider({
         count: 5,
+        widths: 200,
         duration: 100,
       });
 
+      expect(jslider.getTotalWidth()).toBe(1000);
       expect(jslider.getBoxDelay(0)).toBe(0);
       expect(jslider.getBoxDelay(1)).toBe(20);
       expect(jslider.getBoxDelay(2)).toBe(40);
       expect(jslider.getBoxDelay(3)).toBe(60);
       expect(jslider.getBoxDelay(4)).toBe(80);
+    });
+
+    it('returns correct box delay // widths is an array', function() {
+      var jslider = new JSlider({
+        count: 5,
+        widths: [100, 500, 100, 300, 100],
+        duration: 100,
+      });
+
+      expect(jslider.getTotalWidth()).toBe(1100);
+      expect(jslider.getBoxDelay(0)).toBe(0);
+      expect(jslider.getBoxDelay(1)).toBe(9.091);
+      expect(jslider.getBoxDelay(2)).toBe(54.545);
+      expect(jslider.getBoxDelay(3)).toBe(63.636);
+      expect(jslider.getBoxDelay(4)).toBe(90.909);
     });
   });
 
