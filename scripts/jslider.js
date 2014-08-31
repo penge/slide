@@ -4,10 +4,10 @@ window.JSlider = (function() {
   var DEFAULTS = {
     id: 'news',
     count: 10,
+    widths: 200,
+    width: null,
     height: 200,
-    width: 200,
     duration: 100,
-    customTotalWidth: null,
   };
 
   function JSlider(settings) {
@@ -15,10 +15,10 @@ window.JSlider = (function() {
 
     this.setId(this.settings.id);
     this.setCount(this.settings.count);
+    this.setWidths(this.settings.widths);
     this.setWidth(this.settings.width);
     this.setHeight(this.settings.height);
     this.setDuration(this.settings.duration);
-    this.setCustomTotalWidth(this.settings.customTotalWidth);
   }
 
   var isNonEmptyString = function(value) {
@@ -27,6 +27,14 @@ window.JSlider = (function() {
 
   var isPositiveInteger = function(value) {
     return parseInt(value) === value && value > 0;
+  };
+
+  var isPositiveIntegerArray = function(array, length) {
+    return (array instanceof Array) &&
+      array.length === length &&
+      array.map(function(num) {
+        return isPositiveInteger(num);
+      }).indexOf(false) == -1;
   };
 
   JSlider.prototype.getDefaultSettings = function() {
@@ -43,10 +51,10 @@ window.JSlider = (function() {
     var oks = [
       _settings.id ? this.setId(_settings.id) : true,
       _settings.count ? this.setCount(_settings.count) : true,
+      _settings.widths ? this.setWidths(_settings.widths) : true,
       _settings.width ? this.setWidth(_settings.width) : true,
       _settings.height ? this.setHeight(_settings.height) : true,
       _settings.duration ? this.setDuration(_settings.duration) : true,
-      _settings.customTotalWidth ? this.setCustomTotalWidth(_settings.customTotalWidth) : true,
     ];
 
     return oks.indexOf(false) === -1;
@@ -73,6 +81,16 @@ window.JSlider = (function() {
   JSlider.prototype.setCount = function(value) {
     var ok = isPositiveInteger(value);
     this.settings.count = ok ? value : DEFAULTS.count;
+    return ok;
+  };
+
+  JSlider.prototype.getWidths = function() {
+    return this.settings.widths;
+  };
+
+  JSlider.prototype.setWidths = function(value) {
+    var ok = isPositiveInteger(value) || isPositiveIntegerArray(value, this.getCount());
+    this.settings.widths = ok ? value : DEFAULTS.widths;
     return ok;
   };
 
@@ -107,21 +125,42 @@ window.JSlider = (function() {
   };
 
   JSlider.prototype.getTotalWidth = function() {
-    return this.getCount() * this.getWidth();
+    var widths = this.getWidths();
+    var count = this.getCount();
+
+    if (!(widths instanceof Array)) {
+      return widths * count;
+    }
+
+    var result = 0;
+    for (var i = 0; i < count; i++) {
+      result += widths[i];
+    }
+    return result;
   };
 
-  JSlider.prototype.getCustomTotalWidth = function() {
-    return this.settings.customTotalWidth || this.getTotalWidth();
+  JSlider.prototype.getBoxWidth = function(boxIndex) {
+    var widths = this.getWidths();
+    if (isPositiveInteger(widths)) {
+      return widths;
+    }
+    return widths[boxIndex];
   };
 
-  JSlider.prototype.setCustomTotalWidth = function(value) {
-    var ok = isPositiveInteger(value);
-    this.settings.customTotalWidth = ok ? value : DEFAULTS.customTotalWidth; 
-    return ok;
+  JSlider.prototype.getBoxOffset = function(boxIndex) {
+    var offset = 0;
+    for (var i = 0, count = boxIndex; i < count; i++) {
+      offset += this.getBoxWidth(i);
+    }
+    return offset;
   };
 
   JSlider.prototype.getBoxDelay = function(boxIndex) {
-    return parseFloat(((this.getDuration() / this.getCount()) * (boxIndex)).toFixed(3));
+    var offset = this.getBoxOffset(boxIndex);
+    var portion = offset / this.getTotalWidth();
+    var duration = this.getDuration();
+
+    return parseFloat((portion * duration).toFixed(3));
   };
 
   JSlider.prototype.getHtml = function() {
@@ -138,9 +177,9 @@ window.JSlider = (function() {
 
   JSlider.prototype.getCss = function() {
     var id         = '#' + this.getId();
-    var customTotalWidth = this.getCustomTotalWidth() + 'px';
-    var totalWidth = this.getTotalWidth() + 'px';
-    var width      = this.getWidth() + 'px';
+    var width      = (this.getWidth() || this.getTotalWidth()) + 'px';
+    var translateX = this.getTotalWidth() + 'px';
+    var marginLeft = this.getBoxWidth(0) + 'px';
     var height     = this.getHeight() + 'px';
     var duration   = this.getDuration() + 's';
     var animation  = this.getId();
@@ -153,14 +192,14 @@ window.JSlider = (function() {
       id + ' .boxes{' +
         'overflow:hidden;' +
         'position:relative;' +
-        'width:' + customTotalWidth + ';' +
+        'width:' + width + ';' +
         'height:' + height + ';' +
-        'margin-left:-' + width + ';' +
+        'margin-left:-' + marginLeft + ';' +
         '}' +
       id + ' .boxes .box{' +
         'position:absolute;' +
         'float:left;' +
-        'width:' + width + ';' +
+        'width:' + marginLeft + ';' +
         'height:' + height + ';' +
         'line-height:' + height + ';' +
         'user-select:none;' +
@@ -181,9 +220,9 @@ window.JSlider = (function() {
           '}';
     }
     css += '' +
-      '@keyframes ' + animation + '{100%{transform:translateX(' + totalWidth + ');}}' +
-      '@-webkit-keyframes ' + animation + '{100%{-webkit-transform:translateX(' + totalWidth + ');}}' +
-      '@-moz-keyframes ' + animation + '{100%{-moz-transform:translateX(' + totalWidth + ');}}' +
+      '@keyframes ' + animation + '{100%{transform:translateX(' + translateX + ');}}' +
+      '@-webkit-keyframes ' + animation + '{100%{-webkit-transform:translateX(' + translateX + ');}}' +
+      '@-moz-keyframes ' + animation + '{100%{-moz-transform:translateX(' + translateX + ');}}' +
       '';
 
     return css;
