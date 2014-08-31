@@ -3,9 +3,9 @@ UI.init({
   inputs: {
     $id:       $('#id'),
     $count:    $('#count'),
+    $widths:   $('#widths'),
     $width:    $('#width'),
     $height:   $('#height'),
     $duration: $('#duration'),
-    $customTotalWidth: $('#custom-total-width'),
   },
 }); 
