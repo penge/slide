@@ -22,7 +22,10 @@ window.Slide = (function() {
   }
 
   var isIdString = function(value) {
-    return value && /^[^-][a-z|-]+[^-]$/.test(value);
+    if (!value) {
+      return false;
+    }
+    return /^([a-z]+[-]*[a-z])+$/.test(value);
   };
 
   var isPositiveInteger = function(value) {
