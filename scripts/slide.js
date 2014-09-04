@@ -19,7 +19,7 @@ window.Slide = (function() {
     if (!value) {
       return false;
     }
-    return /^([a-z]+[-]*[a-z])+$/.test(value);
+    return /^([a-z]+[-]*[a-z]+)+$/.test(value);
   };
 
   var isPositiveInteger = function(value) {
