@@ -1,4 +1,4 @@
-window.JSlider = (function() {
+window.Slide = (function() {
   'use strict';
   
   var DEFAULTS = {
@@ -10,7 +10,7 @@ window.JSlider = (function() {
     duration: 100,
   };
 
-  function JSlider(settings) {
+  function Slide(settings) {
     this.settings = settings ? settings : {};
 
     this.setId(this.settings.id);
@@ -37,15 +37,15 @@ window.JSlider = (function() {
       }).indexOf(false) == -1;
   };
 
-  JSlider.prototype.getDefaultSettings = function() {
+  Slide.prototype.getDefaultSettings = function() {
     return DEFAULTS;
   };
 
-  JSlider.prototype.getSettings = function() {
+  Slide.prototype.getSettings = function() {
     return this.settings;
   };
 
-  JSlider.prototype.setSettings = function(settings) {
+  Slide.prototype.setSettings = function(settings) {
     var _settings = settings ? settings : {};
 
     var oks = [
@@ -60,75 +60,75 @@ window.JSlider = (function() {
     return oks.indexOf(false) === -1;
   };
 
-  JSlider.areSettingsValid = function(settings) {
-    return new JSlider().setSettings(settings); 
+  Slide.areSettingsValid = function(settings) {
+    return new Slide().setSettings(settings); 
   };
 
-  JSlider.prototype.isWidthsArray = function() {
+  Slide.prototype.isWidthsArray = function() {
     return this.getWidths() instanceof Array;
   };
 
-  JSlider.prototype.getId = function() {
+  Slide.prototype.getId = function() {
     return this.settings.id;
   };
 
-  JSlider.prototype.setId = function(value) {
+  Slide.prototype.setId = function(value) {
     var ok = isIdString(value);
     this.settings.id = ok ? value : DEFAULTS.id;
     return ok;
   };
 
-  JSlider.prototype.getCount = function() {
+  Slide.prototype.getCount = function() {
     return this.settings.count;
   };
 
-  JSlider.prototype.setCount = function(value) {
+  Slide.prototype.setCount = function(value) {
     var ok = isPositiveInteger(value);
     this.settings.count = ok ? value : DEFAULTS.count;
     return ok;
   };
 
-  JSlider.prototype.getWidths = function() {
+  Slide.prototype.getWidths = function() {
     return this.settings.widths;
   };
 
-  JSlider.prototype.setWidths = function(value) {
+  Slide.prototype.setWidths = function(value) {
     var ok = isPositiveInteger(value) || isPositiveIntegerArray(value, this.getCount());
     this.settings.widths = ok ? value : DEFAULTS.widths;
     return ok;
   };
 
-  JSlider.prototype.getWidth = function() {
+  Slide.prototype.getWidth = function() {
     return this.settings.width;
   };
 
-  JSlider.prototype.setWidth = function(value) {
+  Slide.prototype.setWidth = function(value) {
     var ok = isPositiveInteger(value);
     this.settings.width = ok ? value : DEFAULTS.width;
     return ok;
   };
 
-  JSlider.prototype.getHeight = function() {
+  Slide.prototype.getHeight = function() {
     return this.settings.height;
   };
 
-  JSlider.prototype.setHeight = function(value) {
+  Slide.prototype.setHeight = function(value) {
     var ok = isPositiveInteger(value);
     this.settings.height = ok ? value : DEFAULTS.height;
     return ok;
   };
 
-  JSlider.prototype.getDuration = function() {
+  Slide.prototype.getDuration = function() {
     return this.settings.duration;
   };
 
-  JSlider.prototype.setDuration = function(value) {
+  Slide.prototype.setDuration = function(value) {
     var ok = isPositiveInteger(value);
     this.settings.duration = ok ? value : DEFAULTS.duration;
     return ok;
   };
 
-  JSlider.prototype.getTotalWidth = function() {
+  Slide.prototype.getTotalWidth = function() {
     var widths = this.getWidths();
     var count = this.getCount();
 
@@ -143,7 +143,7 @@ window.JSlider = (function() {
     return result;
   };
 
-  JSlider.prototype.getBoxWidth = function(boxIndex) {
+  Slide.prototype.getBoxWidth = function(boxIndex) {
     var widths = this.getWidths();
     if (isPositiveInteger(widths)) {
       return widths;
@@ -151,7 +151,7 @@ window.JSlider = (function() {
     return widths[boxIndex];
   };
 
-  JSlider.prototype.getBoxWidths = function() {
+  Slide.prototype.getBoxWidths = function() {
     var widths = [];
     for (var i = 0, count = this.getCount(); i < count; i++) {
       widths.push(this.getBoxWidth(i));
@@ -159,7 +159,7 @@ window.JSlider = (function() {
     return widths;
   };
 
-  JSlider.prototype.getBoxOffset = function(boxIndex) {
+  Slide.prototype.getBoxOffset = function(boxIndex) {
     var offset = 0;
     for (var i = 0, count = boxIndex; i < count; i++) {
       offset += this.getBoxWidth(i);
@@ -167,7 +167,7 @@ window.JSlider = (function() {
     return offset;
   };
 
-  JSlider.prototype.getBoxDelay = function(boxIndex) {
+  Slide.prototype.getBoxDelay = function(boxIndex) {
     var offset = this.getBoxOffset(boxIndex);
     var portion = offset / this.getTotalWidth();
     var duration = this.getDuration();
@@ -175,7 +175,7 @@ window.JSlider = (function() {
     return parseFloat((portion * duration).toFixed(3));
   };
 
-  JSlider.prototype.getBoxDelays = function() {
+  Slide.prototype.getBoxDelays = function() {
     var delays = [];
     for (var i = 0, count = this.getCount(); i < count; i++) {
       delays.push(this.getBoxDelay(i));
@@ -183,7 +183,7 @@ window.JSlider = (function() {
     return delays;
   };
 
-  JSlider.prototype.getHtml = function() {
+  Slide.prototype.getHtml = function() {
     var html = '';
     html += '<div id="' + this.getId() + '">';
     html += '<div class="boxes">';
@@ -195,7 +195,7 @@ window.JSlider = (function() {
     return html;
   };
 
-  JSlider.prototype.getCss = function() {
+  Slide.prototype.getCss = function() {
     var id = this.getId();
     var css = '';
     css += getCssId(id);
@@ -289,9 +289,9 @@ window.JSlider = (function() {
     ].join('');
   };
 
-  JSlider.prototype.equals = function(other) {
+  Slide.prototype.equals = function(other) {
     return JSON.stringify(this.getSettings()) === JSON.stringify(other.getSettings());
   };
 
-  return JSlider;
+  return Slide;
 })();

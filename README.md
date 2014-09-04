@@ -1,4 +1,4 @@
-# JSlider
+# slide.js
 
 A small library that is used to create custom sliding content by providing us with necessary **HTML** and **CSS** that would take long time to write manually.
 
@@ -13,33 +13,31 @@ You can think of sliding content as several boxes, where:
 - total width of boxes is usually larger that the page width or parent container width,
 - boxes are sliding from left to right in some defined speed.
 
-Current version of **JSlider** supports equally large boxes only.
-
 ## Usage
 
-You can use **JSlider** manually or by opening `index.html` that utilizes the library with nice live preview.
+You can use **Slide** by opening `index.html` that utilizes the library with nice live preview, or manually.
 
-To use **JSlider** manually, you will need the `./scripts/jslider.js` file.
+To use **Slide** manually, you will need the `./scripts/slide.js` file.
 
-## jslider.js
+## slide.js
 
 This is the library itself. The manual usage is as follows:
 
 ```js
-// STEP 1: Create an instance of JSlider
+// STEP 1: Create an instance of Slide
 // By omitting the initialization, we would get the same defaults
 // By omitting just some initialization key, we would get the same default for that key
-var slider = new JSlider({
+var slide = new Slide({
   id:       "news",   //ID
   count:        10,   //number of boxes
-  width:       200,   //width of each box
+  widths:      200,   //width of each box
   height:      200,   //height of each box
   duration:    100,   //sliding speed, lower number = faster
 });                   
 
 // STEP 2: Get the HTML and CSS
-var html = slider.getHtml();
-var css  = slider.getCss();
+var html = slide.getHtml();
+var css  = slide.getCss();
 ```
 
 All you need from now is to paste the supplied **HTML** and **CSS** wherever you need. Lastly, add content into boxes.

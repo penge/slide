@@ -2,11 +2,11 @@ window.Inputs = (function() {
   'use strict';
 
   var _inputs;
-  var _jslider;
+  var _slide;
 
-  function Inputs(inputs, jslider) {
+  function Inputs(inputs, slide) {
     _inputs = inputs;
-    this.setJslider(jslider);
+    this.setSlide(slide);
   }
 
   Inputs.prototype.getId = function() {
@@ -44,13 +44,13 @@ window.Inputs = (function() {
     };
   };
 
-  Inputs.prototype.getJslider = function() {
-    return _jslider;
+  Inputs.prototype.getSlide = function() {
+    return _slide;
   };
 
-  Inputs.prototype.setJslider = function(jslider) {
-    _jslider = jslider;
-    if (!_jslider) {
+  Inputs.prototype.setSlide = function(slide) {
+    _slide = slide;
+    if (!_slide) {
       return;
     }
     setAll();
@@ -66,32 +66,32 @@ window.Inputs = (function() {
   };
 
   var setId = function() {
-    _inputs.$id.val(_jslider.getId());
+    _inputs.$id.val(_slide.getId());
   };
 
   var setCount = function() {
-    _inputs.$count.val(_jslider.getCount());
+    _inputs.$count.val(_slide.getCount());
   };
 
   var setWidths = function() {
-    var isArray = _jslider.isWidthsArray();
-    var value = isArray ? _jslider.getDefaultSettings().widths : _jslider.getWidths();
+    var isArray = _slide.isWidthsArray();
+    var value = isArray ? _slide.getDefaultSettings().widths : _slide.getWidths();
     Template.init(Element.getClosestSetting(_inputs.$widths), null, value, !isArray);
     recreateWidthsInputs(isArray);
   };
   
   var setWidth = function() {
-    var value = _jslider.getWidth() || _jslider.getTotalWidth();
+    var value = _slide.getWidth() || _slide.getTotalWidth();
     _inputs.$width.val(value);
-    Template.init(Element.getClosestSetting(_inputs.$width), null, value, _jslider.getWidth() !== null);
+    Template.init(Element.getClosestSetting(_inputs.$width), null, value, _slide.getWidth() !== null);
   };
 
   var setHeight = function() {
-    _inputs.$height.val(_jslider.getHeight());
+    _inputs.$height.val(_slide.getHeight());
   };
 
   var setDuration = function() {
-    _inputs.$duration.val(_jslider.getDuration());
+    _inputs.$duration.val(_slide.getDuration());
   };
 
   var recreateWidthsInputs = function(active) {
@@ -101,15 +101,15 @@ window.Inputs = (function() {
   var getWidthsInputsBuffer = function(active) {
     var buffer = [];
     var template = '#widths-template .widths-setting';
-    for (var i = 0, count = _jslider.getCount(); i < count; i++) {
-      buffer.push(Template.clone(template, i+1, _jslider.getBoxWidth(i), active));
+    for (var i = 0, count = _slide.getCount(); i < count; i++) {
+      buffer.push(Template.clone(template, i+1, _slide.getBoxWidth(i), active));
     }
     return buffer;
   };
   
   Inputs.prototype.getProperWidths = function() {
     if (Element.isChecked($('#widths-checkbox')) ||
-      this.getCount() != _jslider.getCount()) {
+      this.getCount() != _slide.getCount()) {
       return this.getWidths();
     }
     var widthsArray = [];
@@ -123,7 +123,7 @@ window.Inputs = (function() {
     if (Element.isChecked($('#width-checkbox'))) {
       return this.getWidth();
     }
-    return _jslider.getWidth() || _jslider.getTotalWidth();
+    return _slide.getWidth() || _slide.getTotalWidth();
   };
 
   return Inputs;

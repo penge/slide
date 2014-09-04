@@ -5,4 +5,4 @@ UI.init(new Inputs({
   $width:    $('#width'),
   $height:   $('#height'),
   $duration: $('#duration'),
-})).setJslider(new JSlider());
+})).setSlide(new Slide());

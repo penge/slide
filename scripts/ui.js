@@ -40,9 +40,9 @@ window.UI = (function() {
     });
   };
 
-  var applyLimits = function(jslider) {
-    jslider.setCount(Math.min(100, jslider.getCount()));
-    return jslider;
+  var applyLimits = function(slide) {
+    slide.setCount(Math.min(100, slide.getCount()));
+    return slide;
   };
 
   var updateIfNeeded = function($input, code) {
@@ -58,35 +58,35 @@ window.UI = (function() {
 
   var update = function() {
     var settings = _inputs.getSettings();
-    if (!JSlider.areSettingsValid(settings)) {
+    if (!Slide.areSettingsValid(settings)) {
       return;
     }
-    var jslider = applyLimits(new JSlider(settings));
-    setJslider(jslider);
+    var slide = applyLimits(new Slide(settings));
+    setSlide(slide);
   };
 
-  var preview = function(jslider) {
-    new Previewer(jslider.getHtml(), jslider.getCss()).preview();
+  var preview = function(slide) {
+    new Previewer(slide.getHtml(), slide.getCss()).preview();
   };
 
-  var getJslider = function() {
+  var getSlide = function() {
     if (_inputs === null) {
       return;
     }
-    return _inputs.getJslider();
+    return _inputs.getSlide();
   };
 
-  var setJslider = function(jslider) {
+  var setSlide = function(slide) {
     if (_inputs === null) {
       return;
     }
-    _inputs.setJslider(jslider);
-    preview(_inputs.getJslider());
+    _inputs.setSlide(slide);
+    preview(_inputs.getSlide());
   };
 
   return {
     init: init,
-    getJslider: getJslider,
-    setJslider: setJslider,
+    getSlide: getSlide,
+    setSlide: setSlide,
   };
 })();
