@@ -75,7 +75,7 @@ window.Inputs = (function() {
 
   var setWidths = function() {
     var isArray = _slide.isWidthsArray();
-    var value = isArray ? _slide.getDefaultSettings().widths : _slide.getWidths();
+    var value = isArray ? Slide.getExampleSettings().widths : _slide.getWidths();
     Template.init(Element.getClosestSetting(_inputs.$widths), null, value, !isArray);
     recreateWidthsInputs(isArray);
   };
