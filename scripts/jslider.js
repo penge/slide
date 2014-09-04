@@ -64,6 +64,10 @@ window.JSlider = (function() {
     return new JSlider().setSettings(settings); 
   };
 
+  JSlider.prototype.isWidthsArray = function() {
+    return this.getWidths() instanceof Array;
+  };
+
   JSlider.prototype.getId = function() {
     return this.settings.id;
   };
