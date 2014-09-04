@@ -1,24 +1,18 @@
 window.Slide = (function() {
   'use strict';
   
-  var DEFAULTS = {
+  var EXAMPLE_SETTINGS = {
     id: 'news',
     count: 10,
     widths: 200,
-    width: null,
+    width: 1000,
     height: 200,
     duration: 100,
   };
 
   function Slide(settings) {
-    this.settings = settings ? settings : {};
-
-    this.setId(this.settings.id);
-    this.setCount(this.settings.count);
-    this.setWidths(this.settings.widths);
-    this.setWidth(this.settings.width);
-    this.setHeight(this.settings.height);
-    this.setDuration(this.settings.duration);
+    this.settings = {};
+    this.setSettings(settings, true);
   }
 
   var isIdString = function(value) {
@@ -40,31 +34,38 @@ window.Slide = (function() {
       }).indexOf(false) == -1;
   };
 
-  Slide.prototype.getDefaultSettings = function() {
-    return DEFAULTS;
+  Slide.getExampleSettings = function() {
+    return EXAMPLE_SETTINGS;
   };
 
   Slide.prototype.getSettings = function() {
     return this.settings;
   };
 
-  Slide.prototype.setSettings = function(settings) {
-    var _settings = settings ? settings : {};
+  Slide.prototype.setSettings = function(settings, aggressive) {
+    var _set = settings ? settings : {};
 
     var oks = [
-      _settings.id ? this.setId(_settings.id) : true,
-      _settings.count ? this.setCount(_settings.count) : true,
-      _settings.widths ? this.setWidths(_settings.widths) : true,
-      _settings.width ? this.setWidth(_settings.width) : true,
-      _settings.height ? this.setHeight(_settings.height) : true,
-      _settings.duration ? this.setDuration(_settings.duration) : true,
+      _set.id       || aggressive ? this.setId(_set.id)             : true,
+      _set.count    || aggressive ? this.setCount(_set.count)       : true,
+      _set.widths   || aggressive ? this.setWidths(_set.widths)     : true,
+      _set.width                  ? this.setWidth(_set.width)       : true,
+      _set.height   || aggressive ? this.setHeight(_set.height)     : true,
+      _set.duration || aggressive ? this.setDuration(_set.duration) : true,
     ];
 
-    return oks.indexOf(false) === -1;
+    var result = oks.indexOf(false) === -1;
+
+    if (aggressive && !result) {
+      var keys = Object.keys(EXAMPLE_SETTINGS);
+      throw new Error('Wrong or missing ' + keys[oks.indexOf(false)] + '!');
+    }
+
+    return result;
   };
 
   Slide.areSettingsValid = function(settings) {
-    return new Slide().setSettings(settings); 
+    return new Slide(EXAMPLE_SETTINGS).setSettings(settings);
   };
 
   Slide.prototype.isWidthsArray = function() {
@@ -77,7 +78,9 @@ window.Slide = (function() {
 
   Slide.prototype.setId = function(value) {
     var ok = isIdString(value);
-    this.settings.id = ok ? value : DEFAULTS.id;
+    if (ok) {
+      this.settings.id = value;
+    }
     return ok;
   };
 
@@ -87,7 +90,9 @@ window.Slide = (function() {
 
   Slide.prototype.setCount = function(value) {
     var ok = isPositiveInteger(value);
-    this.settings.count = ok ? value : DEFAULTS.count;
+    if (ok) {
+      this.settings.count = value;
+    }
     return ok;
   };
 
@@ -97,7 +102,9 @@ window.Slide = (function() {
 
   Slide.prototype.setWidths = function(value) {
     var ok = isPositiveInteger(value) || isPositiveIntegerArray(value, this.getCount());
-    this.settings.widths = ok ? value : DEFAULTS.widths;
+    if (ok) {
+      this.settings.widths = value;
+    }
     return ok;
   };
 
@@ -107,7 +114,9 @@ window.Slide = (function() {
 
   Slide.prototype.setWidth = function(value) {
     var ok = isPositiveInteger(value);
-    this.settings.width = ok ? value : DEFAULTS.width;
+    if (ok) {
+      this.settings.width = value;
+    }
     return ok;
   };
 
@@ -117,7 +126,9 @@ window.Slide = (function() {
 
   Slide.prototype.setHeight = function(value) {
     var ok = isPositiveInteger(value);
-    this.settings.height = ok ? value : DEFAULTS.height;
+    if (ok) {
+      this.settings.height = value;
+    }
     return ok;
   };
 
@@ -127,7 +138,9 @@ window.Slide = (function() {
 
   Slide.prototype.setDuration = function(value) {
     var ok = isPositiveInteger(value);
-    this.settings.duration = ok ? value : DEFAULTS.duration;
+    if (ok) {
+      this.settings.duration = value;
+    }
     return ok;
   };
 

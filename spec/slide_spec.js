@@ -44,39 +44,26 @@ describe('Slide', function() {
       expect(slide.getTotalWidth()).toBe(1000); // 200 + 100 + 600 + 100
     });
     
-    var expectDefaults = function(slide) {
-      expect(slide.getId()).toBe('news');
-      expect(slide.getCount()).toBe(10);
-      expect(slide.getWidths()).toBe(200);
-      expect(slide.getWidth()).toBe(null);
-      expect(slide.getHeight()).toBe(200);
-      expect(slide.getDuration()).toBe(100);
-      expect(slide.getTotalWidth()).toBe(2000);
-    };
-
-    it('properly sets defaults if settings omitted', function() {
-      var slide = new Slide();
-
-      expectDefaults(slide);
-    });
-
-    it('properly sets defaults for invalid settings', function() {
-      var slide = new Slide({
-        id: '234',
-        count: 15.8,
-        widths: -14,
-        height: 'abc',
-        duration: -90, 
-      });
-
-      expectDefaults(slide);
+    it('throws error for wrong/missing settings', function() {
+      expect(function() { new Slide(); }).toThrowError('Wrong or missing id!');
+      expect(function() { new Slide({id: 'news'}); }).toThrowError('Wrong or missing count!');
+      expect(function() { new Slide({id: 'news', count: 10}); }).toThrowError('Wrong or missing widths!');
+      expect(function() { new Slide({id: 'news', count: 10, widths: 200}); }).toThrowError('Wrong or missing height!');
+      expect(function() { new Slide({id: 'news', count: 10, widths: 200, height: 200}); }).toThrowError('Wrong or missing duration!');
+      expect(function() { new Slide({id: 'news', count: 10, widths: 200, height: 200, duration: 100}); }).not.toThrowError();
     });
   });
 
   describe('setters', function() {
 
     it('returns true/false for correct/incorrect values', function() {
-      var slide = new Slide();
+      var slide = new Slide({
+        id: 'news',
+        count: 10,
+        widths: 200,
+        height: 300,
+        duration: 100, 
+      });
 
       expect(slide.setId('my-id')).toBe(true);
       expect(slide.setId(543)).toBe(false);
@@ -112,8 +99,11 @@ describe('Slide', function() {
 
     it('returns correct total width // widths is an integer', function() {
       var slide = new Slide({
+        id: 'news',
         count: 5,
         widths: 300,
+        height: 200,
+        duration: 100,
       });
 
       expect(slide.getTotalWidth()).toBe(1500);
@@ -121,8 +111,11 @@ describe('Slide', function() {
 
     it('returns correct total width // widths is an array', function() {
       var slide = new Slide({
+        id: 'news',
         count: 5,
         widths: [100, 100, 100, 200, 300],
+        height: 200,
+        duration: 100,
       });
 
       expect(slide.getTotalWidth()).toBe(800);
@@ -133,8 +126,10 @@ describe('Slide', function() {
 
     it('returns correct box delay // widths is a integer', function() {
       var slide = new Slide({
+        id: 'news',
         count: 5,
         widths: 200,
+        height: 200,
         duration: 100,
       });
 
@@ -148,8 +143,10 @@ describe('Slide', function() {
 
     it('returns correct box delay // widths is an array', function() {
       var slide = new Slide({
+        id: 'news',
         count: 5,
         widths: [100, 500, 100, 300, 100],
+        height: 200,
         duration: 100,
       });
 
@@ -166,8 +163,10 @@ describe('Slide', function() {
 
     it('returns correct box width // widths is a integer', function() {
       var slide = new Slide({
+        id: 'news',
         count: 3,
         widths: 300,
+        height: 200,
         duration: 100,
       });
 
@@ -178,8 +177,10 @@ describe('Slide', function() {
 
     it('returns correct box width // widths is an array', function() {
       var slide = new Slide({
+        id: 'news',
         count: 3,
         widths: [300, 200, 75],
+        height: 200,
         duration: 100,
       });
 
@@ -193,8 +194,10 @@ describe('Slide', function() {
 
     it('returns correct box offset // widths is a integer', function() {
       var slide = new Slide({
+        id: 'news',
         count: 3,
         widths: 300,
+        height: 200,
         duration: 100,
       });
 
@@ -205,8 +208,10 @@ describe('Slide', function() {
 
     it('returns correct box offset // widths is an array', function() {
       var slide = new Slide({
+        id: 'news',
         count: 3,
         widths: [400, 150, 100],
+        height: 200,
         duration: 100,
       });
 
@@ -220,7 +225,11 @@ describe('Slide', function() {
 
     it('returns correct html string', function() {
       var slide = new Slide({
-        count: 3
+        id: 'news',
+        count: 3,
+        widths: 200,
+        height: 200,
+        duration: 100,
       });
       var html = slide.getHtml(); 
       var expectedHtml = '' + 
@@ -299,17 +308,25 @@ describe('Slide', function() {
   describe('#equals', function() {
 
     it('returns true for objects with the same settings', function() {
-      var a = new Slide();
-      var b = new Slide();
+      var a = new Slide({ id: 'news', count: 10, widths: 200, height: 200, duration: 100 });
+      var b = new Slide({ id: 'news', count: 10, widths: 200, height: 200, duration: 100 });
 
       expect(a).toEqual(b);
     });
 
     it('returns false for objects with different settings', function() {
-      var a = new Slide({ count: 4 });
-      var b = new Slide({ count: 7 });
+      var a = new Slide({ id: 'news', count: 10, widths: 200, height: 200, duration: 100 });
+      var b = new Slide({ id: 'data', count: 10, widths: 200, height: 200, duration: 100 });
+      var c = new Slide({ id: 'news', count: 33, widths: 200, height: 200, duration: 100 });
+      var d = new Slide({ id: 'news', count: 10, widths: 333, height: 200, duration: 100 });
+      var e = new Slide({ id: 'news', count: 10, widths: 200, height: 333, duration: 100 });
+      var f = new Slide({ id: 'news', count: 10, widths: 200, height: 200, duration: 333 });
 
       expect(a).not.toEqual(b);
+      expect(a).not.toEqual(c);
+      expect(a).not.toEqual(d);
+      expect(a).not.toEqual(e);
+      expect(a).not.toEqual(f);
     });
   });
 });
