@@ -1,169 +1,92 @@
-window.UI = (function() { 
+window.UI = (function() {
   'use strict';
 
-  var jslider;
-  var inputs;
+  var _inputs;
 
-  var init = function(settings) {
-    jslider = settings.jslider;
-    inputs = settings.inputs;
-
-    initInputs(jslider);
-    initInputsEvents();
+  var init = function(inputs) {
+    _inputs = inputs;
     initLinks();
     initLinksEvents();
+    initInputsEvents();
     initCheckboxesEvents();
-
-    preview(jslider);
-  };
-
-  var isActive = function(el) {
-    return el.hasClass('active'); 
-  };
-
-  var activate = function(el) {
-    el.addClass('active');
-  };
-
-  var deactivate = function(el) {
-    el.removeClass('active');
-  };
-
-  var getKeyCode = function(e) {
-    return (e.keyCode || e.which);
-  };
-
-  var isAnArrowKey = function(code) {
-    return code == 37 || code == 38 || code == 39 || code == 40;
-  };
-
-  var initInputs = function(jslider) {
-    inputs.$id.val(jslider.getId());
-    inputs.$count.val(jslider.getCount());
-    inputs.$widths.val(jslider.getWidths());
-    inputs.$height.val(jslider.getHeight());
-    inputs.$duration.val(jslider.getDuration());
-
-    initWidthInput(jslider);
-    initWidthsInputs(jslider);
-  };
-
-  var initWidthInput = function(jslider) {
-    inputs.$width.val(jslider.getWidth() || jslider.getTotalWidth());
-  };
-
-  var initWidthsInputs = function(jslider) {
-    var $settings = $('#settings');
-    $settings.find('.widths-setting').remove();
-    $settings.append(createWidthsInputs(jslider));
-  };
-
-  var createWidthsInputs = function(jslider) {
-    var buffer = [];
-    var $template = $('#widths-template').clone();
-
-    for (var i = 0, count = jslider.getCount(); i < count; i++) {
-      $template.find('.id').text(i + 1);
-      $template.find('input').attr('value', jslider.getBoxWidth(i));
-      buffer.push($template.html());
-    }
-    return buffer;
-  };
-
-  var initInputsEvents = function() {
-    $(document).on('keyup', '.input', function(e) {
-      if (isAnArrowKey(getKeyCode(e))) {
-        return;
-      }
-      update($(this).attr('id'));
-    }).on('change', '.input', function() {
-      update($(this).attr('id'));
-    });
+    return this;
   };
 
   var initLinks = function() {
-    activate($('#html-link'));
-    $('#css').hide();
+    Element
+      .activate($('#html-link'))
+      .hide($('#css'));
   };
 
   var initLinksEvents = function() {
     $(document).on('click', '.link', function() {
-      // deactive all links, hide all codes
-      deactivate($('.link'));
-      $('.code').hide();
-      
-      // activate specific link, show specific code
-      activate($(this));
-      var codeId = '#' + $(this).attr('id').replace('-link','');
-      $(codeId).show();
+      Element
+        .deactivate($('.link'))
+        .activate($(this))
+        .hide($('.code'))
+        .show($('#' + $(this).attr('id').replace('-link','')));
+    });
+  };
+
+  var initInputsEvents = function() {
+    $(document).on('keyup', '.input', function(e) {
+      updateIfNeeded($(this), Key.getKeyCode(e));
     });
   };
 
   var initCheckboxesEvents = function() {
     $(document).on('change', '.checkbox', function() {
-      var $this = $(this);
-      var isChecked = $this.is(':checked');
-      var $setting = $this.closest('.setting');
-      $setting.toggleClass('active', isChecked); 
-      $setting.find('.input').prop('tabindex', isChecked ? 0 : -1);
-      if (!isChecked) {
-        update('checkbox');
-      }
+      update();
     });
   };
 
-  var getSettings = function() {
-    var settings = {
-      id:       inputs.$id.val(),
-      count:    parseInt(inputs.$count.val()),
-      widths:   parseInt(inputs.$widths.val()),
-      height:   parseInt(inputs.$height.val()),
-      duration: parseInt(inputs.$duration.val()),
-    };
-
-    if (isActive(inputs.$width.closest('.setting'))) {
-      settings.width = parseInt(inputs.$width.val());
-    }
-
-    return settings;
+  var applyLimits = function(jslider) {
+    jslider.setCount(Math.min(100, jslider.getCount()));
+    return jslider;
   };
 
-  var reinitInputs = function(sender, jslider) {
-    var allowedSenders = [
-      'count',
-      'widths',
-      'checkbox',
-    ];
-    
-    if (allowedSenders.indexOf(sender) == -1) {
+  var updateIfNeeded = function($input, code) {
+    var value = $input.val();
+    var integerValue = parseInt(value);
+    if (!value || (value == integerValue && integerValue < 2) || Key.isUpDownArrow(code)) {
       return;
     }
-
-    initWidthInput(jslider);
-    initWidthsInputs(jslider);
+    if (Key.isBackspace(code) || Key.isCharacter(code) || Key.isNumber(code)) {
+      update();
+    }
   };
 
-  var update = function(sender) {
-    var settings = getSettings();
-    
-    // Prevent updating if users' inputs are blank or wrong
+  var update = function() {
+    var settings = _inputs.getSettings();
     if (!JSlider.areSettingsValid(settings)) {
       return;
     }
-
-    jslider = new JSlider(settings);
-    reinitInputs(sender, jslider);
-    preview(jslider);
+    var jslider = applyLimits(new JSlider(settings));
+    setJslider(jslider);
   };
 
   var preview = function(jslider) {
-    var html = jslider.getHtml();
-    var css  = jslider.getCss();
+    new Previewer(jslider.getHtml(), jslider.getCss()).preview();
+  };
 
-    new Previewer(html, css).preview();
+  var getJslider = function() {
+    if (_inputs == null) {
+      return;
+    }
+    return _inputs.getJslider();
+  };
+
+  var setJslider = function(jslider) {
+    if (_inputs == null) {
+      return;
+    }
+    _inputs.setJslider(jslider);
+    preview(_inputs.getJslider());
   };
 
   return {
     init: init,
+    getJslider: getJslider,
+    setJslider: setJslider,
   };
 })();

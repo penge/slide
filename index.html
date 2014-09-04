@@ -21,34 +21,37 @@
     <div class="title">Settings</div>
 
     <div class="setting active">
-      <div>ID?</div>
+      <div>ID</div>
       <input id="id" class="input">
     </div>
 
     <div class="setting active">
-      <div>How many?</div>
-      <input id="count" class="input" type="number" min="2">boxes
+      <div>How many</div>
+      <input id="count" class="input">boxes
     </div>
 
     <div class="setting active">
-      <div>Width of each?</div>
-      <input id="widths" class="input" type="number" min="10">px
+      <div>Width of each</div>
+      <input id="widths" class="input">px
+      <input id="widths-checkbox" class="checkbox" type="checkbox">
     </div>
 
-    <div class="setting active">
-      <div>Height of each?</div>
-      <input id="height" class="input" type="number" min="10">px
-    </div>
-
-    <div class="setting active">
-      <div>Duration?</div>
-      <input id="duration" class="input" type="number" min="10">sec
-    </div>
+    <div id="individual-widths"></div>
 
     <div class="setting">
-      <div>Total width?</div>
-      <input id="width" class="input" tabindex="-1" type="number" min="10">px
-      <input id="advanced" class="checkbox" type="checkbox" value="advanced">
+      <div>Width</div>
+      <input id="width" class="input">px
+      <input id="width-checkbox" class="checkbox" type="checkbox">
+    </div>
+
+    <div class="setting active">
+      <div>Height</div>
+      <input id="height" class="input">px
+    </div>
+
+    <div class="setting active">
+      <div>Duration</div>
+      <input id="duration" class="input">sec
     </div>
   </div>
   
@@ -63,8 +66,7 @@
     <div id="widths-template">
       <div class="setting widths-setting">
         <div>Width <span class="id"></span></div>
-        <input class="input" tabindex="-1" type="number" min="10">px
-        <input id="advanced" class="checkbox" type="checkbox" value="advanced">
+        <input class="input widths-input">px
       </div>
     </div>
   </div>
@@ -72,6 +74,10 @@
   <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="scripts/jslider.js"></script>
   <script src="scripts/previewer.js"></script>
+  <script src="scripts/element.js"></script>
+  <script src="scripts/key.js"></script>
+  <script src="scripts/template.js"></script>
+  <script src="scripts/inputs.js"></script>
   <script src="scripts/ui.js"></script>
   <script src="scripts/main.js"></script>
   <script>
