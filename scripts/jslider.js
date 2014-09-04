@@ -21,8 +21,8 @@ window.JSlider = (function() {
     this.setDuration(this.settings.duration);
   }
 
-  var isNonEmptyString = function(value) {
-    return value && !!value.length;
+  var isIdString = function(value) {
+    return value && /^[^-][a-z|-]+[^-]$/.test(value);
   };
 
   var isPositiveInteger = function(value) {
@@ -73,7 +73,7 @@ window.JSlider = (function() {
   };
 
   JSlider.prototype.setId = function(value) {
-    var ok = isNaN(value) && isNonEmptyString(value);
+    var ok = isIdString(value);
     this.settings.id = ok ? value : DEFAULTS.id;
     return ok;
   };
