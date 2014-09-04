@@ -70,14 +70,14 @@ window.UI = (function() {
   };
 
   var getJslider = function() {
-    if (_inputs == null) {
+    if (_inputs === null) {
       return;
     }
     return _inputs.getJslider();
   };
 
   var setJslider = function(jslider) {
-    if (_inputs == null) {
+    if (_inputs === null) {
       return;
     }
     _inputs.setJslider(jslider);
