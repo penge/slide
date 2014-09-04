@@ -33,6 +33,10 @@ body {
   padding: 10px 20px;
 }
 
+.dot {
+  padding: 0 5px;
+}
+
 .link {
   cursor: pointer;
   opacity: 0.4;
