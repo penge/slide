@@ -175,6 +175,14 @@ window.JSlider = (function() {
     return parseFloat((portion * duration).toFixed(3));
   };
 
+  JSlider.prototype.getBoxDelays = function() {
+    var delays = [];
+    for (var i = 0, count = this.getCount(); i < count; i++) {
+      delays.push(this.getBoxDelay(i));
+    }
+    return delays;
+  };
+
   JSlider.prototype.getHtml = function() {
     var html = '';
     html += '<div id="' + this.getId() + '">';
