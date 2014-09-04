@@ -151,6 +151,14 @@ window.JSlider = (function() {
     return widths[boxIndex];
   };
 
+  JSlider.prototype.getBoxWidths = function() {
+    var widths = [];
+    for (var i = 0, count = this.getCount(); i < count; i++) {
+      widths.push(this.getBoxWidth(i));
+    }
+    return widths;
+  };
+
   JSlider.prototype.getBoxOffset = function(boxIndex) {
     var offset = 0;
     for (var i = 0, count = boxIndex; i < count; i++) {
