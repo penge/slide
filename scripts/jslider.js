@@ -196,56 +196,97 @@ window.JSlider = (function() {
   };
 
   JSlider.prototype.getCss = function() {
-    var id         = '#' + this.getId();
-    var width      = (this.getWidth() || this.getTotalWidth()) + 'px';
-    var translateX = this.getTotalWidth() + 'px';
-    var marginLeft = this.getBoxWidth(0) + 'px';
-    var height     = this.getHeight() + 'px';
-    var duration   = this.getDuration() + 's';
-    var animation  = this.getId();
-    var delay      = null;
-    var css = '' +
-      id + '{' +
-        'overflow:hidden;' +
-        'width:100%;' +
-        '}' +
-      id + ' .boxes{' +
-        'overflow:hidden;' +
-        'position:relative;' +
-        'width:' + width + ';' +
-        'height:' + height + ';' +
-        'margin-left:-' + marginLeft + ';' +
-        '}' +
-      id + ' .boxes .box{' +
-        'position:absolute;' +
-        'float:left;' +
-        'width:' + marginLeft + ';' +
-        'height:' + height + ';' +
-        'line-height:' + height + ';' +
-        'user-select:none;' +
-        '-webkit-user-select:none;' +
-        '-moz-user-select:none;' +
-        'animation:' + animation + ' ' + duration  + ' linear infinite;' +
-        '-webkit-animation:' + animation + ' ' + duration  + ' linear infinite;' +
-        '-moz-animation:' + animation + ' ' + duration  + ' linear infinite;' +
-        '}' +
-        '';
-    for(var i = 0, count = this.getCount(); i < count; i++) {
-      delay = this.getBoxDelay(i) + 's';
-      css += '' +
-        id + ' .boxes .box:nth-child(' + (i + 1) + '){' +
-          'animation-delay:-' + delay + ';' +
-          '-webkit-animation-delay:-' + delay + ';' +
-          '-moz-animation-delay:-' + delay + ';' +
-          '}';
-    }
-    css += '' +
-      '@keyframes ' + animation + '{100%{transform:translateX(' + translateX + ');}}' +
-      '@-webkit-keyframes ' + animation + '{100%{-webkit-transform:translateX(' + translateX + ');}}' +
-      '@-moz-keyframes ' + animation + '{100%{-moz-transform:translateX(' + translateX + ');}}' +
-      '';
-
+    var id = this.getId();
+    var css = '';
+    css += getCssId(id);
+    css += getCssBoxes(id, this.getTotalWidth(), this.getHeight(), this.getBoxWidth(0));
+    css += getCssBoxesBox(id, this.isWidthsArray() ? null : this.getWidths(), this.getHeight(), this.getDuration());
+    css += getCssBoxesBoxChild(id, this.isWidthsArray() ? this.getBoxWidths() : null); 
+    css += getCssAnimationDelays(id, this.getBoxDelays());
+    css += getCssKeyframes(id, this.getTotalWidth());
     return css;
+  };
+
+  var getCssId = function(id) {
+    return [
+      '#' + id,
+      '{',
+      'overflow:hidden;',
+      'width:100%;',
+      '}',
+    ].join('');
+  };
+
+  var getCssBoxes = function(id, totalWidth, height, marginLeft) {
+    return [
+      '#' + id + ' .boxes',
+      '{',
+      'overflow:hidden;',
+      'position:relative;',
+      'width:' + totalWidth + 'px;',
+      'height:' + height + 'px;',
+      'margin-left:-' + marginLeft + 'px;',
+      '}',
+    ].join('');
+  };
+
+  var getCssBoxesBox = function(id, width, height, duration) {
+      return [
+        '#' + id + ' .boxes .box',
+        '{',
+        'position:absolute;',
+        'float:left;',
+        (width ? ('width:' + width + 'px;') : ''),
+        'height:' + height + 'px;',
+        'line-height:' + height + 'px;',
+        'user-select:none;',
+        '-webkit-user-select:none;',
+        '-moz-user-select:none;',
+        'animation:' + id + ' ' + duration  + 's linear infinite;',
+        '-webkit-animation:' + id + ' ' + duration  + 's linear infinite;',
+        '-moz-animation:' + id + ' ' + duration  + 's linear infinite;',
+        '}',
+      ].join('');
+  };
+
+  var getCssBoxesBoxChild = function(id, widths) {
+    if (!widths) {
+      return '';
+    }
+    var lines = [];
+    for (var i = 0, count = widths.length; i < count; i++) {
+      lines.push([
+        '#' + id + ' .boxes .box:nth-child(' + (i + 1) + ')',
+        '{',
+        'width:' + widths[i] + 'px;',
+        '}',
+      ].join(''));
+    }
+    return lines.join('');
+  };
+
+  var getCssAnimationDelays = function(id, delays) {
+    var lines = [];
+    for(var i = 0, count = delays.length; i < count; i++) {
+      var delay = delays[i] + 's';
+      lines.push([
+        '#' + id + ' .boxes .box:nth-child(' + (i + 1) + ')',
+        '{',
+        'animation-delay:-' + delay + ';',
+        '-webkit-animation-delay:-' + delay + ';',
+        '-moz-animation-delay:-' + delay + ';',
+        '}',
+      ].join(''));
+    }
+    return lines.join('');
+  };
+
+  var getCssKeyframes = function(id, totalWidth) {
+    return [
+      '@keyframes ' + id + '{100%{transform:translateX(' + totalWidth + 'px);}}',
+      '@-webkit-keyframes ' + id + '{100%{-webkit-transform:translateX(' + totalWidth + 'px);}}',
+      '@-moz-keyframes ' + id + '{100%{-moz-transform:translateX(' + totalWidth + 'px);}}',
+    ].join('');
   };
 
   JSlider.prototype.equals = function(other) {
