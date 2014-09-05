@@ -77,7 +77,11 @@ window.Inputs = (function() {
     var isArray = _slide.isWidthsArray();
     var value = isArray ? _slide.getBoxWidth(0) : _slide.getWidths();
     Template.init(Element.getClosestSetting(_inputs.$widths), null, value, !isArray);
-    recreateWidthsInputs(isArray);
+    if (isArray) {
+      recreateWidthsInputs(isArray);
+    } else {
+      $('#individual-widths').empty();
+    }
   };
   
   var setWidth = function() {
@@ -113,9 +117,16 @@ window.Inputs = (function() {
       return this.getWidths();
     }
     var widthsArray = [];
-    $.each($('.widths-input:visible'), function(i, input) {
-      widthsArray.push(parseInt($(input).val()));
-    }); 
+    var widthsInputs = $('.widths-input:visible');
+    if (!widthsInputs.length) {
+      for (var i = 0, count = _slide.getCount(); i < count; i++) {
+        widthsArray.push(this.getWidths());
+      }
+    } else {
+      $.each(widthsInputs, function(i, input) {
+        widthsArray.push(parseInt($(input).val()));
+      }); 
+    }
     return widthsArray;
   };
 
