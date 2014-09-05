@@ -75,7 +75,7 @@ window.Inputs = (function() {
 
   var setWidths = function() {
     var isArray = _slide.isWidthsArray();
-    var value = isArray ? Slide.getExampleSettings().widths : _slide.getWidths();
+    var value = isArray ? _slide.getBoxWidth(0) : _slide.getWidths();
     Template.init(Element.getClosestSetting(_inputs.$widths), null, value, !isArray);
     recreateWidthsInputs(isArray);
   };
@@ -83,7 +83,7 @@ window.Inputs = (function() {
   var setWidth = function() {
     var value = _slide.getWidth() || _slide.getTotalWidth();
     _inputs.$width.val(value);
-    Template.init(Element.getClosestSetting(_inputs.$width), null, value, _slide.getWidth() !== null);
+    Template.init(Element.getClosestSetting(_inputs.$width), null, value, !!_slide.getWidth());
   };
 
   var setHeight = function() {
@@ -123,7 +123,7 @@ window.Inputs = (function() {
     if (Element.isChecked($('#width-checkbox'))) {
       return this.getWidth();
     }
-    return _slide.getWidth() || _slide.getTotalWidth();
+    return null;
   };
 
   return Inputs;

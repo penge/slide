@@ -215,7 +215,7 @@ window.Slide = (function() {
     var id = this.getId();
     var css = '';
     css += getCssId(id);
-    css += getCssBoxes(id, this.getTotalWidth(), this.getHeight(), this.getBoxWidth(0));
+    css += getCssBoxes(id, this.getWidth() || this.getTotalWidth(), this.getHeight(), this.getBoxWidth(0));
     css += getCssBoxesBox(id, this.isWidthsArray() ? null : this.getWidths(), this.getHeight(), this.getDuration());
     css += getCssBoxesBoxChild(id, this.isWidthsArray() ? this.getBoxWidths() : null); 
     css += getCssAnimationDelays(id, this.getBoxDelays());
@@ -233,13 +233,13 @@ window.Slide = (function() {
     ].join('');
   };
 
-  var getCssBoxes = function(id, totalWidth, height, marginLeft) {
+  var getCssBoxes = function(id, width, height, marginLeft) {
     return [
       '#' + id + ' .boxes',
       '{',
       'overflow:hidden;',
       'position:relative;',
-      'width:' + totalWidth + 'px;',
+      'width:' + width + 'px;',
       'height:' + height + 'px;',
       'margin-left:-' + marginLeft + 'px;',
       '}',
