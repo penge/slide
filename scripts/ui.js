@@ -80,7 +80,16 @@ window.UI = (function() {
     if (_inputs === null) {
       return;
     }
-    _inputs.setSlide(slide);
+
+    var oldSlide = getSlide();
+    var newSlide = slide;
+
+    _inputs.setSlide(newSlide);
+    
+    if (oldSlide && newSlide && newSlide.equals(oldSlide)) {
+      return;
+    }
+
     preview(_inputs.getSlide());
   };
 
