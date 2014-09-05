@@ -48,7 +48,7 @@ window.UI = (function() {
   var updateIfNeeded = function($input, code) {
     var value = $input.val();
     var integerValue = parseInt(value);
-    if (!value || (value == integerValue && integerValue < 2) || Key.isUpDownArrow(code)) {
+    if (!value || (value == integerValue && integerValue < 1) || Key.isUpDownArrow(code)) {
       return;
     }
     if (Key.isBackspace(code) || Key.isCharacter(code) || Key.isNumber(code)) {
