@@ -68,10 +68,6 @@ window.Slide = (function() {
     return new Slide(EXAMPLE_SETTINGS).setSettings(settings);
   };
 
-  Slide.prototype.isWidthsArray = function() {
-    return this.getWidths() instanceof Array;
-  };
-
   Slide.prototype.getId = function() {
     return this.settings.id;
   };
@@ -106,6 +102,22 @@ window.Slide = (function() {
       this.settings.widths = value;
     }
     return ok;
+  };
+
+  Slide.prototype.setWidthsToArray = function() {
+    if (this.isWidthsArray()) {
+      return false;
+    }
+    var widths = this.getWidths();
+    var array = [];
+    for (var i = 0, count = this.getCount(); i < count; i++) {
+      array.push(widths);
+    }
+    return this.setWidths(array);
+  };
+
+  Slide.prototype.isWidthsArray = function() {
+    return this.getWidths() instanceof Array;
   };
 
   Slide.prototype.getWidth = function() {
