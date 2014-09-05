@@ -318,7 +318,13 @@ window.Slide = (function() {
   };
 
   Slide.prototype.equals = function(other) {
-    return JSON.stringify(this.getSettings()) === JSON.stringify(other.getSettings());
+    var a = new Slide(this.getSettings());
+    var b = new Slide(other.getSettings());
+
+    a.setWidthsToArray();
+    b.setWidthsToArray();
+
+    return JSON.stringify(a.getSettings()) === JSON.stringify(b.getSettings());
   };
 
   return Slide;

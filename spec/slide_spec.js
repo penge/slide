@@ -308,10 +308,12 @@ describe('Slide', function() {
   describe('#equals', function() {
 
     it('returns true for objects with the same settings', function() {
-      var a = new Slide({ id: 'news', count: 10, widths: 200, height: 200, duration: 100 });
-      var b = new Slide({ id: 'news', count: 10, widths: 200, height: 200, duration: 100 });
+      var a = new Slide({ id: 'news', count: 4, widths: 200, height: 300, duration: 100 });
+      var b = new Slide({ id: 'news', count: 4, widths: 200, height: 300, duration: 100 });
+      var c = new Slide({ id: 'news', count: 4, widths: [200, 200, 200, 200], height: 300, duration: 100 });
 
-      expect(a).toEqual(b);
+      expect(a.equals(b)).toBe(true);
+      expect(a.equals(c)).toBe(true);
     });
 
     it('returns false for objects with different settings', function() {
@@ -322,11 +324,11 @@ describe('Slide', function() {
       var e = new Slide({ id: 'news', count: 10, widths: 200, height: 333, duration: 100 });
       var f = new Slide({ id: 'news', count: 10, widths: 200, height: 200, duration: 333 });
 
-      expect(a).not.toEqual(b);
-      expect(a).not.toEqual(c);
-      expect(a).not.toEqual(d);
-      expect(a).not.toEqual(e);
-      expect(a).not.toEqual(f);
+      expect(a.equals(b)).toBe(false);
+      expect(a.equals(c)).toBe(false);
+      expect(a.equals(d)).toBe(false);
+      expect(a.equals(e)).toBe(false);
+      expect(a.equals(f)).toBe(false);
     });
   });
 });
