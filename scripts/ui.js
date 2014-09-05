@@ -40,11 +40,6 @@ window.UI = (function() {
     });
   };
 
-  var applyLimits = function(slide) {
-    slide.setCount(Math.min(100, slide.getCount()));
-    return slide;
-  };
-
   var updateIfNeeded = function($input, code) {
     var value = $input.val();
     var integerValue = parseInt(value);
@@ -61,8 +56,8 @@ window.UI = (function() {
     if (!Slide.areSettingsValid(settings)) {
       return;
     }
-    var slide = applyLimits(new Slide(settings));
-    setSlide(slide);
+    var limitedSlide = new Limiter(100, 4000).limit(new Slide(settings));
+    setSlide(limitedSlide);
   };
 
   var preview = function(slide) {
