@@ -6,7 +6,7 @@ window.Template = (function() {
   };
 
   var setInput = function(value) {
-    $(this).find('.input').attr('value', value);
+    $(this).find('.input').prop('value', value);
   };
 
   var check = function() {
