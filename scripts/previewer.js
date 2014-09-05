@@ -7,8 +7,8 @@ window.Previewer = (function() {
   }
 
   Previewer.prototype.preview = function() {
-    this.previewHtml();
     this.previewCss();
+    this.previewHtml();
   };
 
   Previewer.prototype.previewHtml = function() {
