@@ -7,8 +7,8 @@ UI.init(new Inputs({
   $duration: $('#duration'),
 })).setSlide(new Slide({
   id: 'news',
-  count: 10,
-  widths: 200,
-  height: 200,
+  count: 6,
+  widths: 400,
+  height: 250,
   duration: 100,
 }));
