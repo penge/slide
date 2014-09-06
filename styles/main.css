@@ -126,13 +126,16 @@ body {
 
 /* Code */
 
-.code {
+code {
+  display: block;
+  font: inherit;
   background: white;
   color: black;
   padding: 20px;
   -webkit-user-select: text;
   -moz-user-select: text;
   user-select: text;
+  white-space: pre-wrap;
 }
 
 /* Media */

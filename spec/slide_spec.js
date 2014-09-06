@@ -221,30 +221,6 @@ describe('Slide', function() {
     });
   });
 
-  describe('#getHtml', function() {
-
-    it('returns correct html string', function() {
-      var slide = new Slide({
-        id: 'news',
-        count: 3,
-        widths: 200,
-        height: 200,
-        duration: 100,
-      });
-      var html = slide.getHtml(); 
-      var expectedHtml = '' + 
-        '<div id="news">' +
-        '<div class="boxes">' +
-        '<div class="box">1</div>' +
-        '<div class="box">2</div>' +
-        '<div class="box">3</div>' +
-        '</div>' +
-        '</div>';
-
-      expect(html).toBe(expectedHtml);
-    });
-  });
-
   describe('#getCss', function() {
     
     it('returns correct css string', function() {

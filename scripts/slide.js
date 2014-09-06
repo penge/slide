@@ -203,18 +203,6 @@ window.Slide = (function() {
     return delays;
   };
 
-  Slide.prototype.getHtml = function() {
-    var html = '';
-    html += '<div id="' + this.getId() + '">';
-    html += '<div class="boxes">';
-    for (var i = 0; i < this.getCount(); i++) {
-      html += '<div class="box">' + (i + 1) + '</div>';
-    }
-    html += '</div>';
-    html += '</div>';
-    return html;
-  };
-
   Slide.prototype.getCss = function() {
     var id = this.getId();
     var css = '';

@@ -15,7 +15,7 @@ window.UI = (function() {
   var initLinks = function() {
     Element
       .activate($('#html-link'))
-      .hide($('#css'));
+      .hide($('#js'));
   };
 
   var initLinksEvents = function() {
@@ -23,7 +23,7 @@ window.UI = (function() {
       Element
         .deactivate($('.link'))
         .activate($(this))
-        .hide($('.code'))
+        .hide($('code'))
         .show($('#' + $(this).attr('id').replace('-link','')));
     });
   };
@@ -61,7 +61,7 @@ window.UI = (function() {
   };
 
   var preview = function(slide) {
-    new Previewer(slide.getHtml(), slide.getCss()).preview();
+    new Previewer(slide).preview();
   };
 
   var getSlide = function() {
