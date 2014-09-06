@@ -1,47 +1,43 @@
 describe('Slide', function() {
 
+  var slide = null;
+  var slideArray = null;
+
+  beforeEach(function() {
+    slide = new Slide({
+      id: 'my-news',
+      count: 4,
+      widths: 200,
+      width: 600,
+      height: 120,
+      duration: 100,
+    });
+
+    slideArray = new Slide({
+      id: 'my-news',
+      count: 4,
+      widths: [100, 600, 200, 100],
+      width: 600,
+      height: 120,
+      duration: 100,
+    });
+  });
+
   describe('initialization', function() {
 
-    it('properly sets variables // widths is integer', function() {
-      var slide = new Slide({
-        id: 'my-news',
-        count: 4,
-        widths: 200,
-        width: 600,
-        height: 100,
-        duration: 300,
-      });
-      
+    it('properly sets variables', function() {
       expect(slide.getId()).toBe('my-news');
       expect(slide.getCount()).toBe(4);
       expect(slide.getWidths()).toBe(200);
       expect(slide.getWidth()).toBe(600);
-      expect(slide.getHeight()).toBe(100);
-      expect(slide.getDuration()).toBe(300);
-      expect(slide.getTotalWidth()).toBe(800); // 200 * 4
-    });
+      expect(slide.getHeight()).toBe(120);
+      expect(slide.getDuration()).toBe(100);
 
-    it('properly sets variables // widths is an array', function() {
-      slide = new Slide({
-        id: 'my-news',
-        count: 4,
-        widths: [200, 100, 600, 100],
-        width: 700,
-        height: 200,
-        duration: 400,
-      });
-
-      expect(slide.getId()).toBe('my-news');
-      expect(slide.getCount()).toBe(4);
-      expect(slide.getWidths().length).toBe(4);
-      expect(slide.getWidths()[0]).toBe(200);
-      expect(slide.getWidths()[1]).toBe(100);
-      expect(slide.getWidths()[2]).toBe(600);
-      expect(slide.getWidths()[3]).toBe(100);
-      expect(slide.getHeight()).toBe(200);
-      expect(slide.getDuration()).toBe(400);
-      expect(slide.getWidth()).toBe(700);
-      expect(slide.getTotalWidth()).toBe(1000); // 200 + 100 + 600 + 100
+      expect(slideArray.getWidths().length).toBe(4);
+      expect(slideArray.getWidths()[0]).toBe(100);
+      expect(slideArray.getWidths()[1]).toBe(600);
+      expect(slideArray.getWidths()[2]).toBe(200);
+      expect(slideArray.getWidths()[3]).toBe(100);
     });
     
     it('throws error for wrong/missing settings', function() {
@@ -57,14 +53,6 @@ describe('Slide', function() {
   describe('setters', function() {
 
     it('returns true/false for correct/incorrect values', function() {
-      var slide = new Slide({
-        id: 'news',
-        count: 10,
-        widths: 200,
-        height: 300,
-        duration: 100, 
-      });
-
       expect(slide.setId('my-id')).toBe(true);
       expect(slide.setId(543)).toBe(false);
 
@@ -97,127 +85,54 @@ describe('Slide', function() {
 
   describe('#getTotalWidth', function() {
 
-    it('returns correct total width // widths is an integer', function() {
-      var slide = new Slide({
-        id: 'news',
-        count: 5,
-        widths: 300,
-        height: 200,
-        duration: 100,
-      });
-
-      expect(slide.getTotalWidth()).toBe(1500);
-    });
-
-    it('returns correct total width // widths is an array', function() {
-      var slide = new Slide({
-        id: 'news',
-        count: 5,
-        widths: [100, 100, 100, 200, 300],
-        height: 200,
-        duration: 100,
-      });
-
-      expect(slide.getTotalWidth()).toBe(800);
+    it('returns correct total width', function() {
+      expect(slide.getTotalWidth()).toBe(800); // 200 * 4
+      expect(slideArray.getTotalWidth()).toBe(1000); // 100 + 600 + 200 + 100
     });
   });
 
   describe('#getBoxDelay', function() {
 
-    it('returns correct box delay // widths is a integer', function() {
-      var slide = new Slide({
-        id: 'news',
-        count: 5,
-        widths: 200,
-        height: 200,
-        duration: 100,
-      });
-
-      expect(slide.getTotalWidth()).toBe(1000);
+    it('returns correct box delay', function() {
       expect(slide.getBoxDelay(0)).toBe(0);
-      expect(slide.getBoxDelay(1)).toBe(20);
-      expect(slide.getBoxDelay(2)).toBe(40);
-      expect(slide.getBoxDelay(3)).toBe(60);
-      expect(slide.getBoxDelay(4)).toBe(80);
-    });
+      expect(slide.getBoxDelay(1)).toBe(25);
+      expect(slide.getBoxDelay(2)).toBe(50);
+      expect(slide.getBoxDelay(3)).toBe(75);
 
-    it('returns correct box delay // widths is an array', function() {
-      var slide = new Slide({
-        id: 'news',
-        count: 5,
-        widths: [100, 500, 100, 300, 100],
-        height: 200,
-        duration: 100,
-      });
-
-      expect(slide.getTotalWidth()).toBe(1100);
-      expect(slide.getBoxDelay(0)).toBe(0);
-      expect(slide.getBoxDelay(1)).toBe(9.091);
-      expect(slide.getBoxDelay(2)).toBe(54.545);
-      expect(slide.getBoxDelay(3)).toBe(63.636);
-      expect(slide.getBoxDelay(4)).toBe(90.909);
+      expect(slideArray.getBoxDelay(0)).toBe(0);
+      expect(slideArray.getBoxDelay(1)).toBe(10);
+      expect(slideArray.getBoxDelay(2)).toBe(70);
+      expect(slideArray.getBoxDelay(3)).toBe(90);
     });
   });
 
   describe('#getBoxWidth', function() {
 
-    it('returns correct box width // widths is a integer', function() {
-      var slide = new Slide({
-        id: 'news',
-        count: 3,
-        widths: 300,
-        height: 200,
-        duration: 100,
-      });
-
-      expect(slide.getBoxWidth(0)).toBe(300);
-      expect(slide.getBoxWidth(1)).toBe(300);
-      expect(slide.getBoxWidth(2)).toBe(300);
-    });
-
-    it('returns correct box width // widths is an array', function() {
-      var slide = new Slide({
-        id: 'news',
-        count: 3,
-        widths: [300, 200, 75],
-        height: 200,
-        duration: 100,
-      });
-
-      expect(slide.getBoxWidth(0)).toBe(300);
+    it('returns correct box width', function() {
+      expect(slide.getBoxWidth(0)).toBe(200);
       expect(slide.getBoxWidth(1)).toBe(200);
-      expect(slide.getBoxWidth(2)).toBe(75);
+      expect(slide.getBoxWidth(2)).toBe(200);
+      expect(slide.getBoxWidth(3)).toBe(200);
+
+      expect(slideArray.getBoxWidth(0)).toBe(100);
+      expect(slideArray.getBoxWidth(1)).toBe(600);
+      expect(slideArray.getBoxWidth(2)).toBe(200);
+      expect(slideArray.getBoxWidth(3)).toBe(100);
     });
   });
 
   describe('#getBoxOffset', function() {
 
-    it('returns correct box offset // widths is a integer', function() {
-      var slide = new Slide({
-        id: 'news',
-        count: 3,
-        widths: 300,
-        height: 200,
-        duration: 100,
-      });
-
+    it('returns correct box offset', function() {
       expect(slide.getBoxOffset(0)).toBe(0);
-      expect(slide.getBoxOffset(1)).toBe(300);
-      expect(slide.getBoxOffset(2)).toBe(600);
-    });
+      expect(slide.getBoxOffset(1)).toBe(200);
+      expect(slide.getBoxOffset(2)).toBe(400);
+      expect(slide.getBoxOffset(3)).toBe(600);
 
-    it('returns correct box offset // widths is an array', function() {
-      var slide = new Slide({
-        id: 'news',
-        count: 3,
-        widths: [400, 150, 100],
-        height: 200,
-        duration: 100,
-      });
-
-      expect(slide.getBoxOffset(0)).toBe(0);
-      expect(slide.getBoxOffset(1)).toBe(400);
-      expect(slide.getBoxOffset(2)).toBe(550);
+      expect(slideArray.getBoxOffset(0)).toBe(0);
+      expect(slideArray.getBoxOffset(1)).toBe(100);
+      expect(slideArray.getBoxOffset(2)).toBe(700);
+      expect(slideArray.getBoxOffset(3)).toBe(900);
     });
   });
 
