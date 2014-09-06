@@ -50,6 +50,20 @@ describe('Slide', function() {
     });
   });
 
+  describe('.getExampleSettings', function() {
+
+    it('returns correct example settings', function() {
+      expect(Slide.getExampleSettings()).toEqual({
+        id: 'news',
+        count: 10,
+        widths: 200,
+        width: 1000,
+        height: 200,
+        duration: 100,
+      });
+    });
+  });
+
   describe('setters', function() {
 
     it('returns true/false for correct/incorrect values', function() {
