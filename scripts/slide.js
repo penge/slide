@@ -179,14 +179,6 @@ window.Slide = (function() {
     return widths[boxIndex];
   };
 
-  Slide.prototype.getBoxWidths = function() {
-    var widths = [];
-    for (var i = 0, count = this.getCount(); i < count; i++) {
-      widths.push(this.getBoxWidth(i));
-    }
-    return widths;
-  };
-
   Slide.prototype.getBoxOffset = function(boxIndex) {
     var offset = 0;
     for (var i = 0, count = boxIndex; i < count; i++) {
@@ -229,7 +221,7 @@ window.Slide = (function() {
     css += getCssId(id);
     css += getCssBoxes(id, this.getWidth() || this.getTotalWidth(), this.getHeight(), this.getBoxWidth(0));
     css += getCssBoxesBox(id, this.isWidthsArray() ? null : this.getWidths(), this.getHeight(), this.getDuration());
-    css += getCssBoxesBoxChild(id, this.isWidthsArray() ? this.getBoxWidths() : null); 
+    css += getCssBoxesBoxChild(id, this.isWidthsArray() ? this.getWidths() : null); 
     css += getCssAnimationDelays(id, this.getBoxDelays());
     css += getCssKeyframes(id, this.getTotalWidth());
     return css;
