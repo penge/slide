@@ -317,6 +317,30 @@ window.Slide = (function() {
     ].join('');
   };
 
+  Slide.prototype.getStyleElementId = function() {
+    return 'slide-' + this.getId();
+  };
+
+  Slide.prototype.removeStyleElement = function() {
+    $(this.getStyleElementId()).remove();
+  };
+
+  Slide.prototype.appendStyleElement = function() {
+    var styleElement = document.createElement('style');
+    var rules = document.createTextNode(this.getCss());
+
+    styleElement.id = this.getStyleElementId();
+    styleElement.type = 'text/css';
+    styleElement.appendChild(rules);
+
+    document.getElementsByTagName('head')[0].appendChild(styleElement);
+  };
+
+  Slide.prototype.run = function() {
+    this.removeStyleElement();
+    this.appendStyleElement();
+  };
+
   Slide.prototype.equals = function(other) {
     var a = new Slide(this.getSettings());
     var b = new Slide(other.getSettings());
