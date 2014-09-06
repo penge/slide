@@ -309,6 +309,7 @@ describe('Slide', function() {
       expect(slideArray.getBoxDelays()).toEqual([0, 10, 70, 90]);
     });
   });
+
   describe('#getCss', function() {
     
     it('returns correct css string', function() {
