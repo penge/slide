@@ -89,7 +89,7 @@ window.Slide = (function() {
   };
 
   Slide.prototype.setCount = function(value) {
-    var ok = isPositiveInteger(value);
+    var ok = isPositiveInteger(value) && value > 1;
     if (ok) {
       this.settings.count = value;
     }
