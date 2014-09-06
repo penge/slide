@@ -261,14 +261,14 @@ describe('Slide', function() {
           'overflow:hidden;' +
           'width:100%;' +
           '}' +
-        '#images .boxes{' +
+        '#images .slideboxes{' +
           'overflow:hidden;' +
           'position:relative;' +
           'width:1500px;' +
           'height:300px;' +
           'margin-left:-500px;' +
           '}' +
-        '#images .boxes .box{' +
+        '#images .slideboxes .slidebox{' +
           'position:absolute;' +
           'float:left;' +
           'width:500px;' +
@@ -281,17 +281,17 @@ describe('Slide', function() {
           '-webkit-animation:images 150s linear infinite;' +
           '-moz-animation:images 150s linear infinite;' +
           '}' +
-        '#images .boxes .box:nth-child(1){' +
+        '#images .slideboxes .slidebox:nth-child(1){' +
           'animation-delay:-0s;' +
           '-webkit-animation-delay:-0s;' +
           '-moz-animation-delay:-0s;' +
           '}' +
-        '#images .boxes .box:nth-child(2){' +
+        '#images .slideboxes .slidebox:nth-child(2){' +
           'animation-delay:-50s;' +
           '-webkit-animation-delay:-50s;' +
           '-moz-animation-delay:-50s;' +
           '}' +
-        '#images .boxes .box:nth-child(3){' +
+        '#images .slideboxes .slidebox:nth-child(3){' +
           'animation-delay:-100s;' +
           '-webkit-animation-delay:-100s;' +
           '-moz-animation-delay:-100s;' +

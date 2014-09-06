@@ -239,7 +239,7 @@ window.Slide = (function() {
 
   var getCssBoxes = function(id, width, height, marginLeft) {
     return [
-      '#' + id + ' .boxes',
+      '#' + id + ' .slideboxes',
       '{',
       'overflow:hidden;',
       'position:relative;',
@@ -252,7 +252,7 @@ window.Slide = (function() {
 
   var getCssBoxesBox = function(id, width, height, duration) {
       return [
-        '#' + id + ' .boxes .box',
+        '#' + id + ' .slideboxes .slidebox',
         '{',
         'position:absolute;',
         'float:left;',
@@ -276,7 +276,7 @@ window.Slide = (function() {
     var lines = [];
     for (var i = 0, count = widths.length; i < count; i++) {
       lines.push([
-        '#' + id + ' .boxes .box:nth-child(' + (i + 1) + ')',
+        '#' + id + ' .slideboxes .slidebox:nth-child(' + (i + 1) + ')',
         '{',
         'width:' + widths[i] + 'px;',
         '}',
@@ -290,7 +290,7 @@ window.Slide = (function() {
     for(var i = 0, count = delays.length; i < count; i++) {
       var delay = delays[i] + 's';
       lines.push([
-        '#' + id + ' .boxes .box:nth-child(' + (i + 1) + ')',
+        '#' + id + ' .slideboxes .slidebox:nth-child(' + (i + 1) + ')',
         '{',
         'animation-delay:-' + delay + ';',
         '-webkit-animation-delay:-' + delay + ';',
