@@ -64,6 +64,29 @@ describe('Slide', function() {
     });
   });
 
+  describe('#getSettings', function() {
+
+    it('returns correct settings', function() {
+      expect(slide.getSettings()).toEqual({
+        id: 'my-news',
+        count: 4,
+        widths: 200,
+        width: 600,
+        height: 120,
+        duration: 100,
+      });
+
+      expect(slideArray.getSettings()).toEqual({
+        id: 'my-news',
+        count: 4,
+        widths: [100, 600, 200, 100],
+        width: 600,
+        height: 120,
+        duration: 100,
+      });
+    });
+  });
+
   describe('setters', function() {
 
     it('returns true/false for correct/incorrect values', function() {
