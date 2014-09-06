@@ -17,7 +17,7 @@ describe('Previewer', function() {
     previewer = new Previewer(slide);  
   });
 
-  describe('initialization', function() {
+  describe('init', function() {
 
     it('properly sets slide', function() {
       expect(previewer.slide.equals(slide)).toBe(true);  

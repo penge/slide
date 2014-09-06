@@ -23,7 +23,7 @@ describe('Slide', function() {
     });
   });
 
-  describe('initialization', function() {
+  describe('init', function() {
 
     it('properly sets variables', function() {
       expect(slide.getId()).toBe('my-news');
