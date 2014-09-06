@@ -64,6 +64,37 @@ describe('Slide', function() {
     });
   });
 
+  describe('.areSettingsValid', function() {
+
+    it('returns true for valid settings', function() {
+      expect(Slide.areSettingsValid({
+        id: 'news',
+        count: 10,
+        widths: 200,
+        width: 1000,
+        height: 200,
+        duration: 100,
+      })).toBe(true);
+    });
+
+    it('returns false for invalid settings', function() {
+      // it is ok to omit some keys here
+      expect(Slide.areSettingsValid({
+        count: 10,
+        widths: 200.2, // invalid value
+      })).toBe(false);
+
+      // all required keys must be present in aggressive check 
+      expect(Slide.areSettingsValid({
+        id: 'news',
+        // count: 10, // count is required
+        widths: 200,
+        height: 200,
+        duration: 100,
+      }, true)).toBe(false);
+    });
+  });
+
   describe('#getSettings', function() {
 
     it('returns correct settings', function() {

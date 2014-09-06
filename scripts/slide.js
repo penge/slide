@@ -38,6 +38,14 @@ window.Slide = (function() {
     return EXAMPLE_SETTINGS;
   };
 
+  Slide.areSettingsValid = function(settings, aggressive) {
+    try {
+      return new Slide(EXAMPLE_SETTINGS).setSettings(settings, aggressive);
+    } catch (error) {
+      return false;
+    }
+  };
+
   Slide.prototype.getSettings = function() {
     return this.settings;
   };
@@ -62,10 +70,6 @@ window.Slide = (function() {
     }
 
     return result;
-  };
-
-  Slide.areSettingsValid = function(settings) {
-    return new Slide(EXAMPLE_SETTINGS).setSettings(settings);
   };
 
   Slide.prototype.getId = function() {
