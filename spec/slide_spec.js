@@ -118,36 +118,133 @@ describe('Slide', function() {
     });
   });
 
-  describe('setters', function() {
+  describe('#setSettings', function() {
 
-    it('returns true/false for correct/incorrect values', function() {
+    var settings = null;
+
+    beforeEach(function() {
+      settings = {
+        id: 'my-news',
+        count: 8,
+        widths: 400,
+        width: 1500,
+        height: 220,
+        duration: 200,
+      };
+    });
+
+    it('sets new settings and returns true if they are all correct', function() {
+      expect(slide.setSettings(settings)).toBe(true);
+      expect(slide.getSettings()).toEqual(settings);
+    });
+
+    it('sets new settings and returns false if some are incorrect', function() {
+      settings.widths = -400;
+      expect(slide.setSettings(settings)).toBe(false);
+      expect(slide.getWidths()).toEqual(200);
+    });
+
+    it('throws error if settings are missing or incorrect in aggressive check', function() {
+      var setSettings = function() {
+        slide.setSettings(settings, true);
+      };
+
+      expect(setSettings).not.toThrowError(); // everything is ok
+
+      settings.widths = -400;
+      expect(setSettings).toThrowError(); // widths is invalid
+
+      delete settings.widths;
+      expect(setSettings).toThrowError(); // widths is missing
+    });
+  });
+
+  describe('#setId', function() {
+
+    it('it sets new value and returns true if value is correct', function() {
       expect(slide.setId('my-id')).toBe(true);
-      expect(slide.setId(543)).toBe(false);
+      expect(slide.getId()).toBe('my-id');
+    });
 
-      expect(slide.setCount(10)).toBe(true);
-      expect(slide.setCount(-3)).toBe(false);
+    it('it does not set new value and returns false if value is incorrect', function() {
+      expect(slide.setId(123)).toBe(false); // only string
+      expect(slide.setId('my-news-2')).toBe(false); // only a-z and - are allowed
+      expect(slide.setId('n')).toBe(false); // at least two characters
+      expect(slide.setId('n-')).toBe(false); // no trailing dash
+      expect(slide.setId('-n')).toBe(false); // no trailing dash
+      expect(slide.getId()).toBe('my-news');
+    });
+  });
 
-      expect(slide.setWidths(200)).toBe(true);
-      expect(slide.setWidths(200.7833)).toBe(false);
+  describe('#setCount', function() {
 
-      slide.setCount(3);
-      expect(slide.setWidths([200, 300, 300])).toBe(true);
-      expect(slide.setWidths([200])).toBe(false);
-      expect(slide.setWidths([200, 300, 300, 300])).toBe(false);
-      expect(slide.setWidths([200, 300, -300])).toBe(false);
-      expect(slide.setWidths(['a', 'b', 'c'])).toBe(false);
+    it('it sets new value and returns true if value is correct', function() {
+      expect(slide.setCount(5)).toBe(true);
+      expect(slide.getCount()).toBe(5);
+    });
 
+    it('it does not set new value and returns false if value is incorrect', function() {
+      expect(slide.setCount(-5)).toBe(false); // only positive numbers
+      expect(slide.setCount(5.1)).toBe(false); // only integer numbers
+      expect(slide.setCount(1)).toBe(false); // at least 2
+      expect(slide.getCount()).toBe(4);
+    });
+  });
+
+  describe('#setWidths', function() {
+
+    it('it sets new value and returns true if value is correct', function() {
+      expect(slide.setWidths(300)).toBe(true);
+      expect(slide.getWidths()).toBe(300);
+
+      expect(slide.setWidths([400, 400, 400, 400])).toBe(true);
+      expect(slide.getWidths()).toEqual([400, 400, 400, 400]);
+    });
+
+    it('it does not set new value and returns false if value is incorrect', function() {
+      expect(slide.setWidths(-300)).toBe(false); // only positive numbers
+      expect(slide.setWidths([400, 400, 400.75, 400])).toBe(false); // only integer numbers
+      expect(slide.setWidths([400, 400])).toBe(false); // array length must follow count
+      expect(slide.getWidths()).toBe(200);
+    });
+  });
+
+  describe('#setWidth', function() {
+
+    it('it sets new value and returns true if value is correct', function() {
       expect(slide.setWidth(1000)).toBe(true);
-      expect(slide.setWidth('1000')).toBe(false);
+      expect(slide.getWidth()).toBe(1000);
+    });
 
-      expect(slide.setHeight(200)).toBe(true);
-      expect(slide.setHeight(-200)).toBe(false);
+    it('it does not set new value and returns false if value is incorrect', function() {
+      expect(slide.setWidth(1000.1)).toBe(false); // only positive integer numbers
+      expect(slide.getWidth()).toBe(600);
+    });
+  });
 
-      expect(slide.setDuration(100)).toBe(true);
-      expect(slide.setDuration(100.2)).toBe(false);
+  describe('#setHeight', function() {
 
-      expect(slide.setSettings({count: 4})).toBe(true);
-      expect(slide.setSettings({count: -4})).toBe(false);
+    it('it sets new value and returns true if value is correct', function() {
+      expect(slide.setHeight(500)).toBe(true);
+      expect(slide.getHeight()).toBe(500);
+    });
+
+    it('it does not set new value and returns false if value is incorrect', function() {
+      expect(slide.setHeight(500.5)).toBe(false); // only positive integer numbers
+      expect(slide.getHeight()).toBe(120);
+    });
+  });
+
+  describe('#setDuration', function() {
+
+    it('it sets new value and returns true if value is correct', function() {
+      expect(slide.setDuration(200)).toBe(true);
+      expect(slide.getDuration()).toBe(200);
+    });
+
+    it('it does not set new value and returns false if value is incorrect', function() {
+      expect(slide.setDuration(200.2)).toBe(false); // only positive integer numbers
+      expect(slide.getDuration()).toBe(100);
     });
   });
 
@@ -156,21 +253,6 @@ describe('Slide', function() {
     it('returns correct total width', function() {
       expect(slide.getTotalWidth()).toBe(800); // 200 * 4
       expect(slideArray.getTotalWidth()).toBe(1000); // 100 + 600 + 200 + 100
-    });
-  });
-
-  describe('#getBoxDelay', function() {
-
-    it('returns correct box delay', function() {
-      expect(slide.getBoxDelay(0)).toBe(0);
-      expect(slide.getBoxDelay(1)).toBe(25);
-      expect(slide.getBoxDelay(2)).toBe(50);
-      expect(slide.getBoxDelay(3)).toBe(75);
-
-      expect(slideArray.getBoxDelay(0)).toBe(0);
-      expect(slideArray.getBoxDelay(1)).toBe(10);
-      expect(slideArray.getBoxDelay(2)).toBe(70);
-      expect(slideArray.getBoxDelay(3)).toBe(90);
     });
   });
 
@@ -204,6 +286,29 @@ describe('Slide', function() {
     });
   });
 
+  describe('#getBoxDelay', function() {
+
+    it('returns correct box delay', function() {
+      expect(slide.getBoxDelay(0)).toBe(0);
+      expect(slide.getBoxDelay(1)).toBe(25);
+      expect(slide.getBoxDelay(2)).toBe(50);
+      expect(slide.getBoxDelay(3)).toBe(75);
+
+      expect(slideArray.getBoxDelay(0)).toBe(0);
+      expect(slideArray.getBoxDelay(1)).toBe(10);
+      expect(slideArray.getBoxDelay(2)).toBe(70);
+      expect(slideArray.getBoxDelay(3)).toBe(90);
+    });
+  });
+
+  describe('#getBoxDelays', function() {
+
+    it('returns correct box delays', function() {
+      expect(slide.getBoxDelays()).toEqual([0, 25, 50, 75]);
+
+      expect(slideArray.getBoxDelays()).toEqual([0, 10, 70, 90]);
+    });
+  });
   describe('#getCss', function() {
     
     it('returns correct css string', function() {
