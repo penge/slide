@@ -271,6 +271,51 @@ describe('Slide', function() {
     });
   });
 
+  describe('#getBoxWidths', function() {
+
+    it('returns correct box widths', function() {
+      expect(slide.getBoxWidths()).toEqual([200, 200, 200, 200]);
+
+      expect(slideArray.getBoxWidths()).toEqual([100, 600, 200, 100]);
+    });
+  });
+
+  describe('#getBoxWidthsByLargest', function() {
+
+    it('returns correct box widths', function() {
+      expect(slide.getBoxWidthsByLargest()).toEqual([200, 200, 200, 200]);
+
+      expect(slideArray.getBoxWidthsByLargest()).toEqual([600, 200, 100, 100]);
+    });
+  });
+
+  describe('#getLargestBoxWidth', function() {
+
+    it('returns correct box width', function() {
+      expect(slide.getLargestBoxWidth()).toBe(200);
+
+      expect(slideArray.getLargestBoxWidth()).toBe(600);
+    });
+  });
+
+  describe('#getMaximumVisibleWidth', function() {
+
+    it('returns correct width', function() {
+      expect(slide.getMaximumVisibleWidth()).toBe(600);
+
+      expect(slideArray.getMaximumVisibleWidth()).toBe(400);
+    });
+  });
+
+  describe('#getVisibleWidth', function() {
+
+    it('returns correct width', function() {
+      expect(slide.getVisibleWidth()).toBe(600);
+
+      expect(slideArray.getVisibleWidth()).toBe(400);
+    });
+  });
+
   describe('#getBoxOffset', function() {
 
     it('returns correct box offset', function() {

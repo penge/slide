@@ -85,7 +85,7 @@ window.Inputs = (function() {
   };
   
   var setWidth = function() {
-    var value = _slide.getWidth() || _slide.getTotalWidth();
+    var value = Math.max(_slide.getVisibleWidth(), _slide.getMaximumVisibleWidth());
     _inputs.$width.val(value);
     Template.init(Element.getClosestSetting(_inputs.$width), null, value, !!_slide.getWidth());
   };

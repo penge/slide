@@ -183,6 +183,33 @@ window.Slide = (function() {
     return widths[boxIndex];
   };
 
+  Slide.prototype.getBoxWidths = function() {
+    var widths = [];
+    for (var i = 0, count = this.getCount(); i < count; i++) {
+      widths.push(this.getBoxWidth(i));
+    }
+    return widths;
+  };
+
+  Slide.prototype.getBoxWidthsByLargest = function(boxIndex) {
+    return this.getBoxWidths().sort(function(a, b) { return b - a; });
+  };
+
+  Slide.prototype.getLargestBoxWidth = function() {
+    return this.getBoxWidthsByLargest()[0];
+  };
+
+  Slide.prototype.getMaximumVisibleWidth = function() {
+    return this.getTotalWidth() - this.getLargestBoxWidth();
+  };
+
+  Slide.prototype.getVisibleWidth = function() {
+    if (this.getWidth()) {
+      return Math.min(this.getWidth(), this.getMaximumVisibleWidth());
+    }
+    return this.getMaximumVisibleWidth();
+  };
+
   Slide.prototype.getBoxOffset = function(boxIndex) {
     var offset = 0;
     for (var i = 0, count = boxIndex; i < count; i++) {
@@ -211,7 +238,7 @@ window.Slide = (function() {
     var id = this.getId();
     var css = '';
     css += getCssId(id);
-    css += getCssBoxes(id, this.getWidth() || this.getTotalWidth(), this.getHeight(), this.getBoxWidth(0));
+    css += getCssBoxes(id, this.getVisibleWidth(), this.getHeight(), this.getLargestBoxWidth());
     css += getCssBoxesBox(id, this.isWidthsArray() ? null : this.getWidths(), this.getHeight(), this.getDuration());
     css += getCssBoxesBoxChild(id, this.isWidthsArray() ? this.getWidths() : null); 
     css += getCssAnimationDelays(id, this.getBoxDelays());
@@ -235,7 +262,7 @@ window.Slide = (function() {
       '{',
       'overflow:hidden;',
       'position:relative;',
-      'width:' + width + 'px;',
+      'width:' + (width + marginLeft) + 'px;',
       'height:' + height + 'px;',
       'margin-left:-' + marginLeft + 'px;',
       '}',
