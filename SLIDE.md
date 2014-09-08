@@ -16,7 +16,7 @@ Define `HTML` that follows this structure:
 </div>
 ```
 
-Write little `Javacript` of your choice:
+Write little `Javascript` of your choice:
 
 ```js
 var slide = new Slide({
