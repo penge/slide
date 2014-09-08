@@ -333,7 +333,7 @@ window.Slide = (function() {
   };
 
   Slide.prototype.removeStyleElement = function() {
-    $(this.getStyleElementId()).remove();
+    $('#' + this.getStyleElementId()).remove();
   };
 
   Slide.prototype.appendStyleElement = function() {
