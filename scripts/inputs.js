@@ -49,10 +49,10 @@ window.Inputs = (function() {
   };
 
   Inputs.prototype.setSlide = function(slide) {
-    _slide = slide;
-    if (!_slide) {
+    if (!slide) {
       return;
     }
+    _slide = slide;
     setAll();
   };
 
