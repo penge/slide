@@ -53,7 +53,7 @@ window.UI = (function() {
 
   var update = function() {
     var settings = _inputs.getSettings();
-    if (!Slide.areSettingsValid(settings)) {
+    if (!Slide.areSettingsValid(settings, true)) {
       return;
     }
     var limitedSlide = new Limiter(100, 4000).limit(new Slide(settings));
