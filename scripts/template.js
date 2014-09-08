@@ -6,7 +6,11 @@ window.Template = (function() {
   };
 
   var setInput = function(value) {
-    $(this).find('.input').prop('value', value);
+    var $input = $(this).find('.input');
+    if ($input.prop('value') === value.toString()) {
+      return;
+    }
+    $input.prop('value', value);
   };
 
   var check = function() {

@@ -65,37 +65,47 @@ window.Inputs = (function() {
     setDuration();
   };
 
+  var set = function($input, newValue) {
+    if ($input.val() === newValue.toString()) {
+      return;
+    }
+    $input.val(newValue);
+  };
+
   var setId = function() {
-    _inputs.$id.val(_slide.getId());
+    set(_inputs.$id, _slide.getId());
   };
 
   var setCount = function() {
-    _inputs.$count.val(_slide.getCount());
+    set(_inputs.$count, _slide.getCount());
   };
 
   var setWidths = function() {
     var isArray = _slide.isWidthsArray();
-    var value = isArray ? _slide.getBoxWidth(0) : _slide.getWidths();
+    var value = isArray ? _slide.getLargestBoxWidth() : _slide.getWidths();
     Template.init(Element.getClosestSetting(_inputs.$widths), null, value, !isArray);
     if (isArray) {
-      recreateWidthsInputs(isArray);
+      if (Element.isEmpty($('#individual-widths'))) {
+        recreateWidthsInputs(isArray);
+      }
     } else {
       $('#individual-widths').empty();
     }
   };
   
   var setWidth = function() {
-    var value = Math.max(_slide.getVisibleWidth(), _slide.getMaximumVisibleWidth());
-    _inputs.$width.val(value);
+    var max = _slide.getMaximumVisibleWidth(); 
+    var current = _slide.getWidth() || max;
+    var value = Math.min(current, max); 
     Template.init(Element.getClosestSetting(_inputs.$width), null, value, !!_slide.getWidth());
   };
 
   var setHeight = function() {
-    _inputs.$height.val(_slide.getHeight());
+    set(_inputs.$height, _slide.getHeight());
   };
 
   var setDuration = function() {
-    _inputs.$duration.val(_slide.getDuration());
+    set(_inputs.$duration, _slide.getDuration());
   };
 
   var recreateWidthsInputs = function(active) {
