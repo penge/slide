@@ -66,7 +66,7 @@ body {
   display: none;
 }
 
-#preview {
+#preview, #individual-widths {
   background: rgba(255,255,255,.1);
 }
 
@@ -92,7 +92,7 @@ body {
 /* Setting */
 
 .setting {
-  margin-top: 20px;
+  padding: 15px;
 }
 
 .setting div {
