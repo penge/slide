@@ -164,3 +164,36 @@ Settings we would like to check.
 Type: `Boolean` Default: `false`
 
 Optional. If true, `Error` will be thrown for wrong/missing attributes.
+
+## getSettings()
+
+Returns: `Object`
+
+Returns the settings object.
+
+## setSettings(settings[,aggressive])
+
+Returns: `Boolean` or `Error`
+
+Used to set new and complete settings or just update some of the attributes.
+
+Example:
+
+```js
+slide.setSettings({
+  width: 800,
+  height: 400,
+});
+```
+
+#### settings
+
+Type: `Object`
+
+Settings we would like to set.
+
+#### aggressive
+
+Type: `Boolean` Default: `false`
+
+Optional. If true, `Error` will be thrown for wrong/missing attributes.
