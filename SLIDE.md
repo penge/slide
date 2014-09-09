@@ -35,6 +35,10 @@ That's it!
 
 We have successfully defined 5 boxes, each 200 pixels wide and 200 pixels high. They are sliding inside 500 pixels wide content with sliding speed set to 100.
 
+Need to define different widths for the boxes? No problem!
+
+Just change the `widths` from `200` to an array, for example, `[100, 200, 500, 80, 80]`.
+
 You have mastered basics of `slide.js`!
 
 Read more to know more!
@@ -86,7 +90,7 @@ The `slideboxes` and `slidebox` classes are required.
 
 The number of `slidebox` elements must be equal to the `count` attribute.
 
-### settings
+#### settings
 
 Type: `Object`
 
@@ -145,17 +149,17 @@ var slide = new Slide(exampleSettings);
 
 ## Slide.areSettingsValid(settings[,aggressive])
 
-Returns: `Boolean`
+Returns: `Boolean` or `Error`
 
 Allows to check if settings are valid or not.
 
-### settings
+#### settings
 
 Type: `Object`
 
 Settings we would like to check.
 
-### aggressive
+#### aggressive
 
 Type: `Boolean` Default: `false`
 
