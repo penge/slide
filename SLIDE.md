@@ -197,3 +197,109 @@ Settings we would like to set.
 Type: `Boolean` Default: `false`
 
 Optional. If true, `Error` will be thrown for wrong/missing attributes.
+
+## getId()
+
+Returns: `String`
+
+Returns current `id` value.
+
+## getCount()
+
+Returns: `Number`
+
+Returns current `count` value.
+
+## getWidths()
+
+Returns: `Number` or `Array`
+
+Returns current `widths` value.
+
+## getWidth()
+
+Returns: `Number`
+
+Returns current `width` value.
+
+## getHeight()
+
+Returns: `Number`
+
+Returns current `height` value.
+
+## getDuration()
+
+Returns: `Number`
+
+Returns current `duration` value.
+
+## setId(value)
+
+Returns: `Boolean`
+
+Sets new `id` value.
+
+Value is set only if it's correct. If so, `true` is returned. Otherwise, value remains unchanged and `false` is returned.
+
+The only allowed values are at least two characters long strings, composed of `a-z` with optional no trailing `-`.
+
+```js
+slide.setId('my-images');  // TRUE
+slide.setId(7);            // FALSE (non-string value)
+slide.setId('-ups');       // FALSE (trailing -)
+```
+
+## setCount(value)
+
+Returns: `Boolean`
+
+Sets new `count` value.
+
+The only allowed values are positive integer numbers with minimum value `2`.
+
+```js
+slide.setCount(10);  // TRUE
+slide.setCount(-3);  // FALSE (negative value)
+slide.setCount(1);   // FALSE (below minimum)
+```
+
+## setWidths(value)
+
+Returns: `Boolean`
+
+Sets new `widths` value.
+
+The only allowed values are positive integer numbers or an array with length equal to the `count` attribute.
+
+```js
+// in all examples, count is set to 3
+slide.setWidths(200);                   // TRUE
+slide.setWidths([200, 500, 300]);       // TRUE
+slide.setWidths([200, -50, 300]);       // FALSE (negative value)
+slide.setWidths([200, 500, 300, 200]);  // FALSE (count exceeded)
+```
+
+## setWidth(value)
+
+Returns: `Boolean`
+
+Sets new `width` value.
+
+The only allowed values are positive integer numbers.
+
+## setHeight(value)
+
+Returns: `Boolean`
+
+Sets new `height` value.
+
+The only allowed values are positive integer numbers.
+
+## setDuration(value)
+
+Returns: `Boolean`
+
+Sets new `duration` value.
+
+The only allowed values are positive integer numbers.
