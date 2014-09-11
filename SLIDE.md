@@ -43,6 +43,60 @@ You have mastered basics of `slide.js`!
 
 Read more to know more!
 
+## Methods overview
+
+```js
+// Creating a new slide
+var slide = new Slide(settings);
+
+// Static methods
+Slide.getExampleSettings();
+Slide.areSettingsValid(settings[,aggressive]);
+
+// Getting and setting the settings
+slide.getSettings();
+slide.setSettings(settings[,aggressive]);
+
+// Getters
+slide.getId();
+slide.getCount();
+slide.getWidths();
+slide.getWidth();
+slide.getHeight();
+slide.getDuration();
+
+// Setters
+slide.setId(value);
+slide.setCount(value);
+slide.setWidths(value);
+slide.setWidth(value);
+slide.setHeight(value);
+slide.setDuration(value);
+
+// Widths manipulation
+slide.setWidthsToArray();
+slide.isWidthsArray();
+
+// Additional getters
+slide.getTotalWidth();
+slide.getBoxWidth(boxIndex);
+slide.getBoxWidths();
+slide.getBoxWidthsByLargest();
+slide.getLargestBoxWidth();
+slide.getMaximumVisibleWidth();
+slide.getVisibleWidth();
+slide.getBoxOffset(boxIndex);
+slide.getBoxDelay(boxIndex);
+slide.getBoxDelays();
+slide.getCss();
+
+// Running the slide
+slide.run();
+
+// Comparing the slides
+slide.equals(other);
+```
+
 ## Slide(settings)
 
 Constructor for building new slide instances.
