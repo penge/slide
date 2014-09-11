@@ -209,6 +209,29 @@ describe('Slide', function() {
     });
   });
 
+  describe('#setWidthsToArray', function() {
+
+    it('sets widths to array if it is number and returns true', function() {
+      expect(slide.setWidthsToArray()).toBe(true);
+      expect(slide.getWidths()).toEqual([200, 200, 200, 200]);
+    });
+
+    it('does not set widths to array if it is array already and returns false', function() {
+      expect(slideArray.setWidthsToArray()).toBe(false);
+    });
+  });
+
+  describe('#isWidthsArray', function() {
+
+    it('returns true if widths is array', function() {
+      expect(slideArray.isWidthsArray()).toBe(true);
+    });
+
+    it('returns false if widths is not array', function() {
+      expect(slide.isWidthsArray()).toBe(false);
+    });
+  });
+
   describe('#setWidth', function() {
 
     it('sets new value and returns true if value is correct', function() {
