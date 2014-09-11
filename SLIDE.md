@@ -303,3 +303,153 @@ Returns: `Boolean`
 Sets new `duration` value.
 
 The only allowed values are positive integer numbers.
+
+## setWidthsToArray()
+
+Returns: `Boolean`
+
+Transforms the `widths` from number to array.
+
+Returns `false` when `widths` is already an array.
+
+```js
+slide.getCount();          // 4
+slide.getWidths();         // 200
+
+slide.setWidthsToArray();  // TRUE
+slide.getWidths();         // [200, 200, 200, 200]
+
+slide.setWidthsToArray();  // FALSE
+```
+
+## isWidthsArray()
+
+Returns: `Boolean`
+
+Returns true if `widths` is in its array form.
+
+## getTotalWidth()
+
+Returns: `Number`
+
+Returns total width of boxes.
+
+```js
+// count is 4, widths is 200
+slide.getTotalWidth();  // 800
+
+// count is 4, widths is [400, 400, 100, 100]
+slide.getTotalWidth();  // 1000
+```
+
+## getBoxWidth(boxIndex)
+
+Returns: `Number`
+
+Returns width of the box at specified index.
+
+```js
+// count is 4, widths is 200
+slide.getBoxWidth(2);  // 200
+
+// count is 4, widths is [400, 400, 100, 100]
+slide.getBoxWidth(2);  // 100
+```
+
+#### boxIndex
+
+Type: `Number`
+
+Zero-based index of box.
+
+## getBoxWidths()
+
+Returns: `Array`
+
+Returns all box widths as an array.
+
+If `widths` is an array, using `getWidths()` would return the same result.
+
+## getBoxWidthsByLargest()
+
+Returns: `Array`
+
+Returns all box widths as an array, with descending order.
+
+## getLargestBoxWidth()
+
+Returns: `Number`
+
+Returns largest box width.
+
+## getMaximumVisibleWidth()
+
+Returns: `Number`
+
+Returns maximum visible width that can be set to the visible area.
+
+## getVisibleWidth()
+
+Returns: `Number`
+
+Returns actual visible width that gets set to the visible area.
+
+The `width` attribute takes precedence only if it's smaller than the maximum visible width.
+
+## getBoxOffset(boxIndex)
+
+Returns: `Number`
+
+Returns offset of the box at specified index.
+
+#### boxIndex
+
+Type: `Number`
+
+Zero-based index of box.
+
+## getBoxDelay(boxIndex)
+
+Returns: `Number`
+
+Returns delay of the box at specified index.
+
+#### boxIndex
+
+Type: `Number`
+
+Zero-based index of box.
+
+## getBoxDelays()
+
+Returns: `Array`
+
+Returns box delays as an array.
+
+## getCss()
+
+Returns: `String`
+
+Returns css that gets set for achieving the slide result.
+
+## run()
+
+The main method that applies our settings and starts the slide.
+
+```js
+slide.run();
+```
+
+## equals(other)
+
+Returns: `Boolean`
+
+Compares two slide instances and returns `true` if they are the same.
+
+Objects can be evaluated as the same even when the `widths` is number and array on the other's side, but only if the array's form consists of the same numbers as the number `widths` is.
+
+#### other
+
+Type: `Slide`
+
+Other slide instance that is going to be compared.
