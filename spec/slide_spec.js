@@ -161,12 +161,12 @@ describe('Slide', function() {
 
   describe('#setId', function() {
 
-    it('it sets new value and returns true if value is correct', function() {
+    it('sets new value and returns true if value is correct', function() {
       expect(slide.setId('my-id')).toBe(true);
       expect(slide.getId()).toBe('my-id');
     });
 
-    it('it does not set new value and returns false if value is incorrect', function() {
+    it('does not set new value and returns false if value is incorrect', function() {
       expect(slide.setId(123)).toBe(false); // only string
       expect(slide.setId('my-news-2')).toBe(false); // only a-z and - are allowed
       expect(slide.setId('n')).toBe(false); // at least two characters
@@ -178,12 +178,12 @@ describe('Slide', function() {
 
   describe('#setCount', function() {
 
-    it('it sets new value and returns true if value is correct', function() {
+    it('sets new value and returns true if value is correct', function() {
       expect(slide.setCount(5)).toBe(true);
       expect(slide.getCount()).toBe(5);
     });
 
-    it('it does not set new value and returns false if value is incorrect', function() {
+    it('does not set new value and returns false if value is incorrect', function() {
       expect(slide.setCount(-5)).toBe(false); // only positive numbers
       expect(slide.setCount(5.1)).toBe(false); // only integer numbers
       expect(slide.setCount(1)).toBe(false); // at least 2
@@ -193,7 +193,7 @@ describe('Slide', function() {
 
   describe('#setWidths', function() {
 
-    it('it sets new value and returns true if value is correct', function() {
+    it('sets new value and returns true if value is correct', function() {
       expect(slide.setWidths(300)).toBe(true);
       expect(slide.getWidths()).toBe(300);
 
@@ -201,7 +201,7 @@ describe('Slide', function() {
       expect(slide.getWidths()).toEqual([400, 400, 400, 400]);
     });
 
-    it('it does not set new value and returns false if value is incorrect', function() {
+    it('does not set new value and returns false if value is incorrect', function() {
       expect(slide.setWidths(-300)).toBe(false); // only positive numbers
       expect(slide.setWidths([400, 400, 400.75, 400])).toBe(false); // only integer numbers
       expect(slide.setWidths([400, 400])).toBe(false); // array length must follow count
@@ -211,12 +211,12 @@ describe('Slide', function() {
 
   describe('#setWidth', function() {
 
-    it('it sets new value and returns true if value is correct', function() {
+    it('sets new value and returns true if value is correct', function() {
       expect(slide.setWidth(1000)).toBe(true);
       expect(slide.getWidth()).toBe(1000);
     });
 
-    it('it does not set new value and returns false if value is incorrect', function() {
+    it('does not set new value and returns false if value is incorrect', function() {
       expect(slide.setWidth(1000.1)).toBe(false); // only positive integer numbers
       expect(slide.getWidth()).toBe(600);
     });
@@ -224,12 +224,12 @@ describe('Slide', function() {
 
   describe('#setHeight', function() {
 
-    it('it sets new value and returns true if value is correct', function() {
+    it('sets new value and returns true if value is correct', function() {
       expect(slide.setHeight(500)).toBe(true);
       expect(slide.getHeight()).toBe(500);
     });
 
-    it('it does not set new value and returns false if value is incorrect', function() {
+    it('does not set new value and returns false if value is incorrect', function() {
       expect(slide.setHeight(500.5)).toBe(false); // only positive integer numbers
       expect(slide.getHeight()).toBe(120);
     });
@@ -237,12 +237,12 @@ describe('Slide', function() {
 
   describe('#setDuration', function() {
 
-    it('it sets new value and returns true if value is correct', function() {
+    it('sets new value and returns true if value is correct', function() {
       expect(slide.setDuration(200)).toBe(true);
       expect(slide.getDuration()).toBe(200);
     });
 
-    it('it does not set new value and returns false if value is incorrect', function() {
+    it('does not set new value and returns false if value is incorrect', function() {
       expect(slide.setDuration(200.2)).toBe(false); // only positive integer numbers
       expect(slide.getDuration()).toBe(100);
     });
