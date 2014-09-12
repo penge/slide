@@ -19,7 +19,7 @@ window.UI = (function() {
   };
 
   var initLinksEvents = function() {
-    $(document).on('click', '.link', function() {
+    $(document).on('click', '#codes .link', function() {
       Element
         .deactivate($('.link'))
         .activate($(this))
