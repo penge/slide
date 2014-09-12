@@ -56,8 +56,16 @@ window.UI = (function() {
     if (!Slide.areSettingsValid(settings, true)) {
       return;
     }
-    var limitedSlide = new Limiter(100, 4000).limit(new Slide(settings));
-    setSlide(limitedSlide);
+    setSlide(getLimitedSlide(settings));
+  };
+
+  var getLimitedSlide = function(settings) {
+    return new Limiter(new Slide(settings), {
+      maxCount: 100,
+      maxWidths: 2000,
+      maxHeight: 2000,
+      maxDuration: 5000,
+    }).limit().getSlide();
   };
 
   var preview = function(slide) {

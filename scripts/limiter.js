@@ -1,34 +1,52 @@
 window.Limiter = (function() {
   'use strict';
 
-  function Limiter(maxCount, maxWidths) {
-    this.maxCount = maxCount;
-    this.maxWidths = maxWidths;
+  function Limiter(slide, limits) {
+    this.slide = slide;
+    this.limits = limits;
   }
 
-  Limiter.prototype.limit = function(slide) {
-    this.limitCount(slide);
-    this.limitWidths(slide);
-    return slide;
+  Limiter.prototype.limit = function() {
+    this.limitCount();
+    this.limitWidths();
+    this.limitHeight();
+    this.limitDuration();
+    return this;
   };
 
-  Limiter.prototype.limitCount = function(slide) {
-    var limitedCount = Math.min(this.maxCount, slide.getCount());
-    slide.setCount(limitedCount);
-    return slide;
+  Limiter.prototype.limitCount = function() {
+    var limitedCount = Math.min(this.limits.maxCount, this.slide.getCount());
+    this.slide.setCount(limitedCount);
+    return this;
   };
 
-  Limiter.prototype.limitWidths = function(slide) {
-    var widths = slide.getWidths();
-    if (!slide.isWidthsArray()) {
-      slide.setWidths(Math.min(this.maxWidths, widths));
+  Limiter.prototype.limitWidths = function() {
+    var widths = this.slide.getWidths();
+    if (!this.slide.isWidthsArray()) {
+      this.slide.setWidths(Math.min(this.limits.maxWidths, widths));
     } else {
       for (var i = 0, count = widths.length; i < count; i++) {
-        widths[i] = Math.min(this.maxWidths, widths[i]);
+        widths[i] = Math.min(this.limits.maxWidths, widths[i]);
       }
-      slide.setWidths(widths);
+      this.slide.setWidths(widths);
     }
-    return slide;
+    return this;
+  };
+
+  Limiter.prototype.limitHeight = function() {
+    var limitedHeight = Math.min(this.limits.maxHeight, this.slide.getHeight());
+    this.slide.setHeight(limitedHeight);
+    return this;
+  };
+
+  Limiter.prototype.limitDuration = function() {
+    var limitedDuration = Math.min(this.limits.maxDuration, this.slide.getDuration());
+    this.slide.setDuration(limitedDuration);
+    return this;
+  };
+
+  Limiter.prototype.getSlide = function() {
+    return this.slide;
   };
 
   return Limiter;
