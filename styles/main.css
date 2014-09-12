@@ -49,12 +49,12 @@ body {
 
 #settings {
   float: left;
-  width: 35%;
+  width: 40%;
 }
 
 #codes {
   float: left;
-  width: 65%;
+  width: 50%;
   text-transform: none;
 }
 
