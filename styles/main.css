@@ -86,13 +86,14 @@ body {
 }
 
 .slideboxes .slidebox {
-  color: #8b8b8b;
-  background: white;
+  cursor: pointer;
+  color: white;
+  background: #ff8989;
 }
 
 .slideboxes .slidebox:nth-child(even) {
-  color: white;
-  background: #ffb3b3;
+  color: #8b8b8b;
+  background: white;
 }
 
 /* Setting */
