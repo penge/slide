@@ -6,6 +6,10 @@ window.Limiter = (function() {
     this.limits = limits;
   }
 
+  Limiter.prototype.getSlide = function() {
+    return this.slide;
+  };
+
   Limiter.prototype.limit = function() {
     this.limitCount();
     this.limitWidths();
@@ -43,10 +47,6 @@ window.Limiter = (function() {
     var limitedDuration = Math.min(this.limits.maxDuration, this.slide.getDuration());
     this.slide.setDuration(limitedDuration);
     return this;
-  };
-
-  Limiter.prototype.getSlide = function() {
-    return this.slide;
   };
 
   return Limiter;
