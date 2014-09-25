@@ -9,12 +9,12 @@ window.Previewer = (function() {
   }
 
   Previewer.prototype.preview = function() {
+    this.slide.run();
+
     injectHtml(this.getHtml());
 
     previewHtml(this.getHtml());
     previewJs(this.getJs());
-
-    this.slide.run();
   };
 
   var injectHtml = function(html) {
