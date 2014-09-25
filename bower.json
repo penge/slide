@@ -1,5 +1,5 @@
 {
-  "name": "jslider",
+  "name": "slide",
   "private": true,
   "devDependencies": {
     "jasmine-standalone": "~2.0.0"
