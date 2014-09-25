@@ -11,10 +11,13 @@ window.Previewer = (function() {
   Previewer.prototype.preview = function() {
     this.slide.run();
 
-    injectHtml(this.getHtml());
+    var html = this.getHtml();
+    var js = this.getJs();
 
-    previewHtml(this.getHtml());
-    previewJs(this.getJs());
+    injectHtml(html);
+
+    previewHtml(html);
+    previewJs(js);
   };
 
   var injectHtml = function(html) {
